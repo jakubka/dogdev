@@ -16,13 +16,16 @@
             this.distanceFromPlayer.subscribe(function(distanceFromPlayer) {
                 if (distanceFromPlayer === 0) {
                     that.hit && that.hit();
+                    clearInterval(that.intervalId);
                 }
             });
+            this.moved = function(c) {};
         };
 
     Creature.prototype.moveCloser = function() {
         var newDistance = this.distanceFromPlayer() - (100 / s.TimeToReachPlayer);
         this.distanceFromPlayer(Math.max(newDistance, 0));
+        this.moved(this);
     };
 
     Creature.prototype.startMoving = function() {

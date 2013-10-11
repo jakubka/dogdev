@@ -6,25 +6,27 @@
         ko = w.ko,
         shot = P.shot,
 
-        Player = function(username) {
+        Player = function() {
             this.id = nextPlayerId++;
-            this.name = username || "defaultname";
+            this.name = ko.observable();
             this.orientation = ko.observable();
-            this.fragsCount = ko.observable(0);
-            this.isDead = ko.observable(false);
-            this.isAlive = ko.observable(true);
+            this.fragsCount = ko.observable();
+            this.isAlive = ko.observable();
         };
 
-    Player.prototype.shoot = function() {
-        var that = this;
-        shot.shoot(this.orientation(), Creatures, function() {
-            that.fragsCount(that.fragsCount() + 1);
-        });
+    Player.prototype.init = function(username, orientation) {
+        this.name(this.name() || username);
+        this.orientation(this.orientation() || orientation);
+        this.fragsCount(0);
+        this.isAlive(true);
     };
 
     Player.prototype.die = function() {
-        this.isDead(true);
         this.isAlive(false);
+    };
+
+    Player.prototype.restart = function() {
+        this.init();
     };
 
     P.Player = Player;

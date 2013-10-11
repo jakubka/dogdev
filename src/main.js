@@ -1,60 +1,29 @@
 (function(w) {
     'use strict';
 
-    var $ = w.$,
-        P = w.P,
-        Player = P.Player,
-        Creatures = P.creaturesList,
-        Marian,
+    var P = w.P,
         compass = P.compass,
-        i = 0,
-        shot = P.shot,
-        ViewModel,
-        settings = P.settings;
+        game = P.game,
 
-    Marian = new Player("Marian");
-    Marian.orientation(111);
-
-    var compassNotAvailable = ko.observable(false);
-
-    compass.init({
-        'orientationUpdateCallback': function(orientation) {
-            Marian.orientation(orientation);
-        },
-        'compassNotAvailableCallback': function() {
-            compassNotAvailable(true);
-        }
-    });
-
-    Creatures.creatureDied = function(c) {
-        setTimeout(function() {
-            Creatures.generateCreature();
-        }, settings.TimeToRecreateCreature * 1000);
-    };
-
-    Creatures.creatureHitPlayer = function(c) {
-        Marian.die();
-    }
-
-    for (var i = 0; i < settings.NumberOfCreaturesAtTheBeginning; i++) {
-        Creatures.generateCreature();
-    }
-
-    ViewModel = function() {
-        this.playerOrientation = Marian.orientation;
-        this.playerFragsCount = Marian.fragsCount;
-        this.playerIsAlive = Marian.isAlive;
-        this.creatures = Creatures;
-        this.compassNotAvailable = compassNotAvailable;
-    };
+        ViewModel = function() {
+            this.player = game.currentPlayer;
+            this.creatures = game.creatures;
+            this.compassNotAvailable = compass.compassNotAvailable;
+        };
 
     ViewModel.prototype.shoot = function() {
-        Marian.shoot();
+        game.shoot();
     };
 
-    ko.applyBindings(new ViewModel());
+    ViewModel.prototype.restart = function() {
+        game.restart();
+    };
 
-    // expose for debugging
-    w.Creatures = Creatures;
+    compass.init(function(orientation) {
+        game.changePlayerOrientation(orientation);
+    });
+
+    game.start();
+    ko.applyBindings(new ViewModel());
 
 }(this));

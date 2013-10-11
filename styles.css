@@ -12,12 +12,20 @@
 table td {
     border: 1px solid grey;
 }
-.big {
+.wide {
     width: 100%;
+}
+.large {
     font-size: 3em;
 }
 .red {
     background-color: red;
+}
+.grey {
+    background-color: grey;
+}
+.green {
+    background-color: green;
 }
 /* buttons */
  .btn {
