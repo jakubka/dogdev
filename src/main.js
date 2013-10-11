@@ -15,12 +15,14 @@
     Marian = new Player("Marian");
     Marian.orientation(111);
 
+    var compassNotAvailable = ko.observable(false);
+
     compass.init({
         'orientationUpdateCallback': function(orientation) {
             Marian.orientation(orientation);
         },
         'compassNotAvailableCallback': function() {
-            //alert('Compass is not available on your device, buy a new one please');
+            compassNotAvailable(true);
         }
     });
 
@@ -35,7 +37,8 @@
         this.creatures = Creatures;
         this.shoot = function() {
             shot.shoot(Marian.orientation(), Creatures);
-        }
+        };
+        this.compassNotAvailable = compassNotAvailable;
     };
 
     ko.applyBindings(new ViewModel());
