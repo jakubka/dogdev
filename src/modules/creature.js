@@ -5,6 +5,7 @@
     var P = w.P,
         ko = w.ko,
         nextCreatureId = 0,
+        s = P.settings,
 
         Creature = function(orientation) {
             this.id = nextCreatureId++;
@@ -13,7 +14,8 @@
         };
 
     Creature.prototype.moveCloser = function() {
-        this.distanceFromPlayer(Math.max(this.distanceFromPlayer() - 5, 0));
+        var newDistance = this.distanceFromPlayer() - (100 / s.TimeToReachPlayer);
+        this.distanceFromPlayer(Math.max(newDistance, 0));
     };
 
     Creature.prototype.startMoving = function() {

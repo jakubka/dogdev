@@ -3,7 +3,8 @@
 
     var P = w.P,
         shot = {},
-        ko = w.ko;
+        ko = w.ko,
+        s = P.settings;
 
     shot.shoot = function(shotOrientation, creatures) {
         var creaturesArray = creatures(),
@@ -14,7 +15,7 @@
             var shotDistance = Math.abs(shotOrientation - creature.orientation());
 
             console.log("distance from creature: " + shotDistance);
-            if (shotDistance < 20 || shotDistance > 340) {
+            if (shotDistance < s.ShotDistanceTolerance || shotDistance > (360 - s.ShotDistanceTolerance)) {
                 console.log("creature to kill: " + creature.orientation());
                 creaturesToKill.push(creature);
             }
