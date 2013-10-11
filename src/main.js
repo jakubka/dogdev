@@ -9,8 +9,8 @@
         Marian,
         compass = P.compass,
         shot = P.shot,
-        i = 0,
-        ViewModel;
+        ViewModel,
+        settings = P.settings;
 
     Marian = new Player("Marian");
     Marian.orientation(111);
@@ -26,10 +26,20 @@
         }
     });
 
-    for (i; i < 10; i++) {
-        var c = new Creature(i * 36);
+    var generateCreature = function() {
+        var orientation = Math.floor(Math.random() * 360);
+        var c = new Creature(orientation);
         Creatures.push(c);
         c.startMoving();
+        c.died = creatureDied;
+    };
+
+    var creatureDied = function () {
+        setTimeout(generateCreature, settings.TimeToRecreateCreature * 1000);
+    };
+
+    for (var i = 0; i < settings.NumberOfCreaturesAtTheBeginning; i++) {
+        generateCreature();
     }
 
     ViewModel = function() {
