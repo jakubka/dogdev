@@ -1,8 +1,19 @@
 (function(w) {
-	var $ = w.$,
-		P = w.P,
-		hwMod = P.hwModule;
+    var $ = w.$,
+        P = w.P,
+        Player = P.Player,
+        Creature = P.Creature,
+        Creatures = [],
+        Marian = new Player("Marian"),
+        i = 0;
 
-	hwMod.sayHello();
+
+    for (i; i < 10; i++) {
+        Creatures.push(new Creature());
+    }
+
+    // expose for debuggine
+    w.Creatures = Creatures;
+
 
 }(this));
