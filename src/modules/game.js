@@ -35,6 +35,10 @@
         creatures.restart();
     };
 
+    game.changePlayerOrientation = function(orientation) {
+        marian.orientation(orientation);
+    };
+
     game.creatures = creatures;
     game.currentPlayer = marian;
 

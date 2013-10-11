@@ -4,11 +4,8 @@
     var P = w.P,
         compass = {};
 
-    compass.init = function(settings) {
-        var compassNotAvailableCallback = settings.compassNotAvailableCallback,
-            orientationUpdateCallback = settings.orientationUpdateCallback,
-            notAvailableCalled = false,
-            notAvailableFunc = function() {
+    compass.init = function(orientationUpdateCb) {
+        var notAvailableFunc = function() {
                 compass.compassNotAvailable(true);
             };
 
@@ -16,7 +13,7 @@
         Compass.needGPS(notAvailableFunc);
 
         Compass.watch(function(orientation) {
-            orientationUpdateCallback && orientationUpdateCallback(Math.floor(orientation));
+            orientationUpdateCb && orientationUpdateCb(Math.floor(orientation));
         });
     };
 

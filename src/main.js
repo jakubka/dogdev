@@ -19,13 +19,8 @@
         game.restart();
     };
 
-    compass.init({
-        'orientationUpdateCallback': function(orientation) {
-            Marian.orientation(orientation);
-        },
-        'compassNotAvailableCallback': function() {
-            compassNotAvailable(true);
-        }
+    compass.init(function(orientation) {
+        game.changePlayerOrientation(orientation);
     });
 
     game.start();
