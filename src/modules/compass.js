@@ -6,7 +6,7 @@
 
     compass.init = function(settings) {
         var compassNotAvailableCallback = settings.compassNotAvailableCallback,
-            orientationUpdateCallback = settings.orientationUpdateCallbackm,
+            orientationUpdateCallback = settings.orientationUpdateCallback,
             notAvailableCalled = false,
             notAvailableFunc = function() {
                 if (!notAvailableCalled) {
