@@ -1,7 +1,8 @@
 (function (w) {
 	var $ = w.$,
-		$msg = $('#msg');
+		P = w.P,
+		hwMod = P.hwModule;
 
-	$msg.text("Pes");
+	hwMod.sayHello();
 
 }(this));
