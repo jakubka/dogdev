@@ -8,9 +8,16 @@
         s = P.settings,
 
         Creature = function(orientation) {
+            var that = this;
+            
             this.id = nextCreatureId++;
             this.distanceFromPlayer = ko.observable(100);
             this.orientation = ko.observable(orientation);
+            this.distanceFromPlayer.subscribe(function(distanceFromPlayer) {
+                if (distanceFromPlayer === 0) {
+                    that.hit && hit();
+                }
+            });
         };
 
     Creature.prototype.moveCloser = function() {

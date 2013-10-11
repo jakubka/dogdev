@@ -32,6 +32,9 @@
         Creatures.push(c);
         c.startMoving();
         c.died = creatureDied;
+        c.hit = function() {
+            Marian.die();
+        };
     };
 
     var creatureDied = function () {
