@@ -8,7 +8,6 @@
         Creatures = P.creaturesList,
         Marian,
         compass = P.compass,
-        shot = P.shot,
         i = 0,
         ViewModel;
 
@@ -34,11 +33,13 @@
 
     ViewModel = function() {
         this.playerOrientation = Marian.orientation;
+        this.playerFragsCount = Marian.fragsCount;
         this.creatures = Creatures;
-        this.shoot = function() {
-            shot.shoot(Marian.orientation(), Creatures);
-        };
         this.compassNotAvailable = compassNotAvailable;
+    };
+
+    ViewModel.prototype.shoot = function() {
+        Marian.shoot();
     };
 
     ko.applyBindings(new ViewModel());
