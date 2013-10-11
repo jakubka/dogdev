@@ -20,6 +20,7 @@
     compass.init({
         'orientationUpdateCallback': function(orientation) {
             Marian.orientation(orientation);
+            alert(orientation);
         },
         'compassNotAvailableCallback': function() {
             compassNotAvailable(true);
