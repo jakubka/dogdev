@@ -2,20 +2,28 @@
     'use strict';
 
     var P = w.P,
-        shot = {};
+        shot = {},
+        ko = w.ko;
 
     shot.shoot = function(shotOrientation, creatures) {
-        for (var creature in creatures) {
-            if (!creatures.hasOwnProperty(creature)) {
-                continue;
-            }
+        var creaturesArray = creatures(),
+            creaturesToKill = [];
 
-            var shotDistance = abs(shotOrientation - creature.orientation());
+        ko.utils.arrayForEach(creaturesArray, function(creature) {
+            console.log(creature.orientation());
+            var shotDistance = Math.abs(shotOrientation - creature.orientation());
 
+            console.log("distance from creature: " + shotDistance);
             if (shotDistance < 20 || shotDistance > 340) {
-                creatures.kill(creature);
+                console.log("creature to kill: " + creature.orientation());
+                creaturesToKill.push(creature);
             }
-        }
+        });
+
+        ko.utils.arrayForEach(creaturesToKill, function(creature) {
+            console.log("killing: " + creature.orientation());
+            creatures.kill(creature);
+        });
     };
 
     // expose module

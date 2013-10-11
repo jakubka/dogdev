@@ -9,9 +9,14 @@
 </div>
 
 <body>
-    <p id="msg"></p>
+    <button data-bind="click:shoot">Shoot!</button>
+    <input type="text" data-bind="value:playerOrientation">
 
-    <div id="trigger">Shot it!</div>
+    <div>Creatures:
+        <ul data-bind="foreach:creatures">
+        	<li data-bind="text:orientation"></li>
+        </ul>
+    </div>
 
     <!-- module init -->
     <script>
@@ -21,13 +26,14 @@
     <!-- libs -->
     <script src="../lib/zepto/zepto.js"></script>
     <script src="../lib/knockout/knockout.js"></script>
-	<script src="../lib/compass.js"></script>
+    <script src="../lib/compass.js"></script>
 
     <!-- modules -->
     <script src="./modules/creature.js"></script>
+    <script src="./modules/creaturesList.js"></script>
     <script src="./modules/player.js"></script>
-	<script src="./modules/compass.js"></script>
-	<script src="./modules/shot.js"></script>
+    <script src="./modules/compass.js"></script>
+    <script src="./modules/shot.js"></script>
 
     <!-- our files -->
     <script src="./main.js"></script>
