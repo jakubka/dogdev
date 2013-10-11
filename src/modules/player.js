@@ -1,4 +1,6 @@
 (function(w) {
+    'use strict';
+    
     var P = w.P,
         nextPlayerId = 0,
         ko = w.ko,

@@ -1,4 +1,6 @@
 (function(w) {
+    'use strict';
+    
     var P = w.P,
         Creature = function() {
             this.distanceFromPlayer = undefined;

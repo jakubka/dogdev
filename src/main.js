@@ -1,4 +1,6 @@
 (function(w) {
+    'use strict';
+
     var $ = w.$,
         P = w.P,
         Player = P.Player,
@@ -6,6 +8,7 @@
         Creatures = [],
         Marian,
         compass = P.compass,
+        shot = P.shot,
         i = 0;
 
     for (i; i < 10; i++) {
@@ -26,6 +29,10 @@
 
     Marian.orientation.subscribe(function(newOrientation) {
         $('#msg').text('Marian\'s orientation: ' + newOrientation);
+    });
+
+    $('#trigger').on('click', function () {
+        shot.shoot(Marian.orientation(), creatures);
     });
 
     // expose for debugging
