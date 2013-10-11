@@ -5,7 +5,7 @@
         s = {};
 
     s.ShotDistanceTolerance = 40; // degrees from each side of shot
-    s.TimeToReachPlayer = 20; // seconds
+    s.TimeToReachPlayer = 2; // seconds
     s.TimeToRecreateCreature = 1; // seconds
     s.NumberOfCreaturesAtTheBeginning = 1;
 

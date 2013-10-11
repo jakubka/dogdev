@@ -13,7 +13,7 @@
 <body>
     <p class="warning" data-bind="visible:compassNotAvailable">Compass not available</p>
 
-    <button class="btn big red" data-bind="click:shoot">Shoot!</button>
+    <button class="btn big red" data-bind="click:shoot,enable:playerIsAlive">Shoot!</button>
 
     <table>
         <tr>

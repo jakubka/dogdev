@@ -49,6 +49,7 @@
     ViewModel = function() {
         this.playerOrientation = Marian.orientation;
         this.playerFragsCount = Marian.fragsCount;
+        this.playerIsAlive = Marian.isAlive;
         this.creatures = Creatures;
         this.compassNotAvailable = compassNotAvailable;
     };
