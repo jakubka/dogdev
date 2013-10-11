@@ -19,7 +19,7 @@
         Compass.needGPS(notAvailableFunc);
 
         Compass.watch(function(orientation) {
-            orientationUpdateCallback && orientationUpdateCallback(orientation);
+            orientationUpdateCallback && orientationUpdateCallback(Math.round(orientation));
         });
     };
 
