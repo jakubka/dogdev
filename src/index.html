@@ -4,15 +4,27 @@
 <head>
     <title>Pes</title>
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+    <link rel="stylesheet" href="../styles.css">
 </head>
 
 <div>
 </div>
 
 <body>
-	<div style="width: 100%;" data-bind="visible:compassNotAvailable">Compass not available</div>
-    <button data-bind="click:shoot" style="width: 100%; height: 10em; background-color: red;">Shoot!</button>
-    <input type="text" data-bind="value:playerOrientation" style="width: 100%; font-size: 3em;">
+    <p class="warning" data-bind="visible:compassNotAvailable">Compass not available</p>
+
+    <button class="btn big red" data-bind="click:shoot">Shoot!</button>
+
+    <table>
+        <tr>
+            <td>Orientation</td>
+            <td data-bind="text: playerOrientation">
+        </tr>
+        <tr>
+            <td>Frags Count</td>
+            <td data-bind="text: playerFragsCount">
+        </tr>
+    </table>
 
     <div>Creatures:
         <ul data-bind="foreach:creatures">
@@ -36,11 +48,11 @@
 
     <!-- modules -->
     <script src="./modules/settings.js"></script>
+    <script src="./modules/shot.js"></script>
+    <script src="./modules/player.js"></script>
     <script src="./modules/creature.js"></script>
     <script src="./modules/creaturesList.js"></script>
-    <script src="./modules/player.js"></script>
     <script src="./modules/compass.js"></script>
-    <script src="./modules/shot.js"></script>
 
     <!-- our files -->
     <script src="./main.js"></script>

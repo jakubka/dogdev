@@ -1,0 +1,26 @@
+.warning {
+    font-weight: bold;
+    padding: 10px;
+    border: 5px solid red;
+    color: red;
+}
+/* table */
+ table {
+    width: 100%;
+    border-collapse: collapse;
+}
+table td {
+    border: 1px solid grey;
+}
+.big {
+    width: 100%;
+    font-size: 3em;
+}
+.red {
+    background-color: red;
+}
+/* buttons */
+ .btn {
+    border: none;
+    height: 2em;
+}

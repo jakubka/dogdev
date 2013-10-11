@@ -6,7 +6,7 @@
         ko = w.ko,
         s = P.settings;
 
-    shot.shoot = function(shotOrientation, creatures) {
+    shot.shoot = function(shotOrientation, creatures, onShootedCb) {
         var creaturesArray = creatures(),
             creaturesToKill = [];
 
@@ -24,6 +24,7 @@
         ko.utils.arrayForEach(creaturesToKill, function(creature) {
             console.log("killing: " + creature.orientation());
             creatures.kill(creature);
+            onShootedCb && onShootedCb();
         });
     };
 
