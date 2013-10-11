@@ -14,7 +14,11 @@
 
     <div>Creatures:
         <ul data-bind="foreach:creatures">
-        	<li><span data-bind="text:id"></span> -> <span data-bind="text:orientation"></span></li>
+            <li>
+                <span data-bind="text:id"></span>->
+                <span data-bind="text:orientation"></span>->
+                <span data-bind="text:distanceFromPlayer"></span>
+            </li>
         </ul>
     </div>
 

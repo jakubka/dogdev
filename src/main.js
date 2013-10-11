@@ -25,7 +25,9 @@
     });
 
     for (i; i < 10; i++) {
-        Creatures.push(new Creature(i * 36));
+        var c = new Creature(i * 36);
+        Creatures.push(c);
+        c.startMoving();
     }
 
     ViewModel = function() {
