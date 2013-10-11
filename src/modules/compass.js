@@ -1,23 +1,23 @@
 (function(w) {
     var P = w.P,
-        compassModule = {},
-        orientationUpdateCallback = null;
+        compassModule = {};
 
     compassModule.init = function(settings) {
-        var compassNotAvailableCallback = settings.compassNotAvailableCallback;
-        orientationUpdateCallback = settings.orientationUpdateCallback;
+        var compassNotAvailableCallback = settings.compassNotAvailableCallback,
+            orientationUpdateCallback = settings.orientationUpdateCallbackm,
+            notAvailableCalled = false,
+            notAvailableFunc = function() {
+                if (!notAvailableCalled) {
+                    compassNotAvailableCallback && compassNotAvailableCallback();
+                    notAvailableCalled = true;
+                }
+            };
 
-        Compass.noSupport(function() {
-            compassNotAvailableCallback && compassNotAvailableCallback();
-        });
-        Compass.needGPS(function() {
-            compassNotAvailableCallback && compassNotAvailableCallback();
-        });
+        Compass.noSupport(notAvailableFunc);
+        Compass.needGPS(notAvailableFunc);
 
-        Compass.watch(function(heading) {
-            if (orientationUpdateCallback) {
-                orientationUpdateCallback(heading);
-            }
+        Compass.watch(function(orientation) {
+            orientationUpdateCallback && orientationUpdateCallback(orientation);
         });
     }
 
