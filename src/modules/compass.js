@@ -8,15 +8,10 @@
         orientationUpdateCallback = settings.orientationUpdateCallback;
 
         Compass.noSupport(function() {
-            if (compassNotAvailableCallback) {
-                compassNotAvailableCallback();
-            }
+            compassNotAvailableCallback && compassNotAvailableCallback();
         });
-
         Compass.needGPS(function() {
-            if (compassNotAvailableCallback) {
-                compassNotAvailableCallback();
-            }
+            compassNotAvailableCallback && compassNotAvailableCallback();
         });
 
         Compass.watch(function(heading) {

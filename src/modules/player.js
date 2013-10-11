@@ -1,11 +1,12 @@
 (function(w) {
     var P = w.P,
         nextPlayerId = 0,
+        ko = w.ko,
 
         Player = function(username) {
             this.id = nextPlayerId++;
             this.name = username || "defaultname";
-            this.orientation = null;
+            this.orientation = ko.observable();
             fragsCount = 0;
         };
 

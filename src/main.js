@@ -4,7 +4,7 @@
         Player = P.Player,
         Creature = P.Creature,
         Creatures = [],
-        Marian = new Player("Marian"),
+        Marian,
         compass = P.compass,
         i = 0;
 
@@ -12,18 +12,23 @@
         Creatures.push(new Creature());
     }
 
-    // expose for debuggine
-    w.Creatures = Creatures;
+    Marian = new Player("Marian");
 
-
-    var compassSettings = {
+    compass.init({
         'orientationUpdateCallback': function(orientation) {
-            $('#msg').text('Your orientation: ' + orientation);
+
+            Marian.orientation(orientation);
         },
         'compassNotAvailableCallback': function() {
             alert('Compass is not available on your device, buy a new one please');
         }
-    };
+    });
 
-    compass.init(compassSettings);
+    Marian.orientation.subscribe(function(newOrientation) {
+        $('#msg').text('Marian\'s orientation: ' + newOrientation);
+    });
+
+    // expose for debugging
+    w.Creatures = Creatures;
+
 }(this));
