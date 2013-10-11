@@ -4,7 +4,6 @@
     var $ = w.$,
         P = w.P,
         Player = P.Player,
-        Creature = P.Creature,
         Creatures = P.creaturesList,
         Marian,
         compass = P.compass,
@@ -27,23 +26,18 @@
         }
     });
 
-    var generateCreature = function() {
-        var orientation = Math.floor(Math.random() * 360);
-        var c = new Creature(orientation);
-        Creatures.push(c);
-        c.startMoving();
-        c.died = creatureDied;
-        c.hit = function() {
-            Marian.die();
-        };
+    Creatures.creatureDied = function(c) {
+        setTimeout(function() {
+            Creatures.generateCreature();
+        }, settings.TimeToRecreateCreature * 1000);
     };
 
-    var creatureDied = function () {
-        setTimeout(generateCreature, settings.TimeToRecreateCreature * 1000);
-    };
+    Creatures.creatureHitPlayer = function(c) {
+        Marian.die();
+    }
 
     for (var i = 0; i < settings.NumberOfCreaturesAtTheBeginning; i++) {
-        generateCreature();
+        Creatures.generateCreature();
     }
 
     ViewModel = function() {
