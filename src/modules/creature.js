@@ -27,9 +27,14 @@
 
     Creature.prototype.startMoving = function() {
         var that = this;
-        setInterval(function() {
+        this.intervalId = setInterval(function() {
             that.moveCloser();
         }, 1000);
+    };
+
+    Creature.prototype.die = function() {
+        clearInterval(this.intervalId);
+        this.died && this.died();
     };
 
     P.Creature = Creature;

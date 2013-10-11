@@ -10,7 +10,7 @@
         var index = this.indexOf(creature);
         if (index > -1) {
             this.splice(index, 1);
-            creature.died && creature.died();
+            creature.die();
         }
     };
 
