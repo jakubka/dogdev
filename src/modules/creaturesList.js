@@ -3,7 +3,7 @@
 
     var P = w.P,
         ko = w.ko,
-        creatures = [],
+        creatures = ko.observableArray(),
 
         creatures.kill = function(creature) {
             var index = this.indexOf(creature);

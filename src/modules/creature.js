@@ -5,9 +5,9 @@
     var P = w.P,
         ko = w.ko,
 
-        Creature = function() {
+        Creature = function(orientation) {
             this.distanceFromPlayer = ko.observable();
-            this.orientation = ko.observable();
+            this.orientation = ko.observable(orientation);
         };
 
     P.Creature = Creature;
