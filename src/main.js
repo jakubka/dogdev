@@ -1,21 +1,23 @@
 (function(w) {
     'use strict';
 
-    var $ = w.$,
-        P = w.P,
-        Player = P.Player,
-        Creatures = P.creaturesList,
-        Marian,
+    var P = w.P,
         compass = P.compass,
-        i = 0,
-        shot = P.shot,
-        ViewModel,
-        settings = P.settings;
+        game = P.game,
 
-    Marian = new Player("Marian");
-    Marian.orientation(111);
+        ViewModel = function() {
+            this.player = game.currentPlayer;
+            this.creatures = game.creatures;
+            this.compassNotAvailable = compass.compassNotAvailable;
+        };
 
-    var compassNotAvailable = ko.observable(false);
+    ViewModel.prototype.shoot = function() {
+        game.shoot();
+    };
+
+    ViewModel.prototype.restart = function() {
+        game.restart();
+    };
 
     compass.init({
         'orientationUpdateCallback': function(orientation) {
@@ -26,35 +28,7 @@
         }
     });
 
-    Creatures.creatureDied = function(c) {
-        setTimeout(function() {
-            Creatures.generateCreature();
-        }, settings.TimeToRecreateCreature * 1000);
-    };
-
-    Creatures.creatureHitPlayer = function(c) {
-        Marian.die();
-    }
-
-    for (var i = 0; i < settings.NumberOfCreaturesAtTheBeginning; i++) {
-        Creatures.generateCreature();
-    }
-
-    ViewModel = function() {
-        this.playerOrientation = Marian.orientation;
-        this.playerFragsCount = Marian.fragsCount;
-        this.playerIsAlive = Marian.isAlive;
-        this.creatures = Creatures;
-        this.compassNotAvailable = compassNotAvailable;
-    };
-
-    ViewModel.prototype.shoot = function() {
-        Marian.shoot();
-    };
-
+    game.start();
     ko.applyBindings(new ViewModel());
-
-    // expose for debugging
-    w.Creatures = Creatures;
 
 }(this));

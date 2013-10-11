@@ -9,10 +9,7 @@
             orientationUpdateCallback = settings.orientationUpdateCallback,
             notAvailableCalled = false,
             notAvailableFunc = function() {
-                if (!notAvailableCalled) {
-                    compassNotAvailableCallback && compassNotAvailableCallback();
-                    notAvailableCalled = true;
-                }
+                compass.compassNotAvailable(true);
             };
 
         Compass.noSupport(notAvailableFunc);
@@ -22,6 +19,8 @@
             orientationUpdateCallback && orientationUpdateCallback(Math.floor(orientation));
         });
     };
+
+    compass.compassNotAvailable = ko.observable(false);
 
     // expose module
     P.compass = compass;

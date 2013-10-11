@@ -13,16 +13,17 @@
 <body>
     <p class="warning" data-bind="visible:compassNotAvailable">Compass not available</p>
 
-    <button class="btn big red" data-bind="click:shoot,enable:playerIsAlive">Shoot!</button>
+    <button class="btn wide large green" data-bind="click:shoot,visible:player.isAlive">Shoot!</button>
+    <button class="btn wide large grey" data-bind="click:restart,visible:player.isAlive() === false">Restart!</button>
 
     <table>
         <tr>
             <td>Orientation</td>
-            <td data-bind="text: playerOrientation">
+            <td data-bind="text: player.orientation">
         </tr>
         <tr>
             <td>Frags Count</td>
-            <td data-bind="text: playerFragsCount">
+            <td data-bind="text: player.fragsCount">
         </tr>
     </table>
 
@@ -44,7 +45,7 @@
     <!-- libs -->
     <script src="../lib/zepto/zepto.js"></script>
     <script src="../lib/knockout/knockout.js"></script>
-    <script src="../lib/compass.js"></script>
+    <script src="../lib/cp.js"></script>
 
     <!-- modules -->
     <script src="./modules/settings.js"></script>
@@ -53,6 +54,7 @@
     <script src="./modules/creature.js"></script>
     <script src="./modules/creaturesList.js"></script>
     <script src="./modules/compass.js"></script>
+    <script src="./modules/game.js"></script>
 
     <!-- our files -->
     <script src="./main.js"></script>
