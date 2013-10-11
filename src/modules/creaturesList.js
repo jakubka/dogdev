@@ -15,8 +15,9 @@
         }
     };
 
-    creatures.creatureDied = function(c) {}
-    creatures.creatureHitPlayer = function(c) {}
+    creatures.creatureDied = function(c) {};
+    creatures.creatureHitPlayer = function(c) {};
+    creatures.creatureSpawned = function(c) {};
 
     creatures.generateCreature = function() {
         var orientation = Math.floor(Math.random() * 360),
@@ -30,6 +31,7 @@
         c.hit = function() {
             creatures.creatureHitPlayer(c);
         };
+        creatures.creatureSpawned(c);
     };
 
     creatures.init = function() {
