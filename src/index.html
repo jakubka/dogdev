@@ -11,31 +11,34 @@
 </div>
 
 <body>
-    <i id="start" data-bind="click:startClicked"></i>
     <p class="warning" data-bind="visible:compassNotAvailable">Compass not available</p>
-    <button class="btn red" data-bind="click:startApp">Run Game!</button>
-    <button class="btn wide large green" data-bind="click:shoot,visible:player.isAlive">Shoot!</button>
-    <button class="btn wide large grey" data-bind="click:restart,visible:player.isAlive() === false">Restart!</button>
+    <i data-bind="visible:environmentInitialized() === false">Loading...</i>
+    <button class="btn wide large red" data-bind="visible:environmentInitialized() && !gameStarted(),click:startApp">Run Game!</button>
 
-    <table>
-        <tr>
-            <td>Orientation</td>
-            <td data-bind="text: player.orientation">
-        </tr>
-        <tr>
-            <td>Frags Count</td>
-            <td data-bind="text: player.fragsCount">
-        </tr>
-    </table>
+    <div data-bind="visible:gameStarted">
+        <button class="btn wide large green" data-bind="click:shoot,visible:player.isAlive">Shoot!</button>
+        <button class="btn wide large grey" data-bind="click:restart,visible:player.isAlive() === false">Restart!</button>
 
-    <div>Creatures:
-        <ul data-bind="foreach:creatures">
-            <li>
-                <span data-bind="text:id"></span>->
-                <span data-bind="text:orientation"></span>->
-                <span data-bind="text:distanceFromPlayer"></span>
-            </li>
-        </ul>
+        <table>
+            <tr>
+                <td>Orientation</td>
+                <td data-bind="text: player.orientation"></td>
+            </tr>
+            <tr>
+                <td>Frags Count</td>
+                <td data-bind="text: player.fragsCount"></td>
+            </tr>
+        </table>
+
+        <div>Creatures:
+            <ul data-bind="foreach:creatures">
+                <li>
+                    <span data-bind="text:id"></span>->
+                    <span data-bind="text:orientation"></span>->
+                    <span data-bind="text:distanceFromPlayer"></span>
+                </li>
+            </ul>
+        </div>
     </div>
 
     <!-- module init -->
