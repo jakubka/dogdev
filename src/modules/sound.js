@@ -22,7 +22,9 @@
     }
 
     Sound.prototype.stop = function() {
-        this.sound.source.stop(0);
+        if (this.sound) {
+            this.sound.source.stop(0);
+        }
     };
 
     /* toto volat pri presunu potvory, bude presouvat zvuk. volat furt. */

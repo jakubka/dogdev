@@ -1,5 +1,4 @@
 (function(w) {
-
     'use strict';
 
     var P = w.P,
@@ -13,38 +12,33 @@
             this.id = nextCreatureId++;
             this.distanceFromPlayer = ko.observable(100);
             this.orientation = ko.observable(orientation);
-            this.distanceFromPlayer.subscribe(function(distanceFromPlayer) {
-                if (distanceFromPlayer === 1) {
-                    that.hit && that.hit();
-
-                    console.log('zabila mie');
-                    // clearInterval(that.intervalId);
-                }
-            });
-            this.moved = function(c) {};
         };
 
-    Creature.prototype.moveCloser = function() {
+    Creature.prototype.move = function() {
         var newDistance = this.distanceFromPlayer() - (100 / s.timeToReachPlayer());
         if (newDistance > 1) {
-            this.distanceFromPlayer(Math.max(newDistance, 1));
+            this.distanceFromPlayer(newDistance);
+            this.onMove && this.onMove(this);
+        } else {
+            this.onHit && this.onHit();
         }
-
-        this.moved(this);
     };
 
     Creature.prototype.startMoving = function() {
         var that = this;
         this.intervalId = setInterval(function() {
-            that.moveCloser();
+            that.move && that.move();
         }, 1000);
     };
 
-    Creature.prototype.die = function() {
+    Creature.prototype.dispose = function() {
         clearInterval(this.intervalId);
-        this.died && this.died();
+    }
+
+    Creature.prototype.die = function() {
+        this.dispose();
+        this.onDied && this.onDied();
     };
 
     P.Creature = Creature;
-
 }(this));

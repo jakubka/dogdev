@@ -78,17 +78,21 @@
 
     sm.stopAll = function() {
         this.backgroundMusic.stop();
+        this.creatureHit.stop();
+        this.shot.stop();
+        this.creatureDie.stop();
+        this.creatureNoise.stop();
 
-        var creatureIdsToRemove = [];
-        for (var creatureId in creaturesNoises) {
-            if (object.hasOwnProperty(property)) {
-                creatureIdsToRemove.push(creatureId);
-            }
-        }
+        // var creatureIdsToRemove = [];
+        // for (var creatureId in creaturesNoises) {
+        //     if (object.hasOwnProperty(property)) {
+        //         creatureIdsToRemove.push(creatureId);
+        //     }
+        // }
 
-        for (var i = creatureIdsToRemove.length - 1; i >= 0; i--) {
-            stopCreatureNoise(creatureIdsToRemove[i]);
-        };
+        // for (var i = creatureIdsToRemove.length - 1; i >= 0; i--) {
+        //     stopCreatureNoise(creatureIdsToRemove[i]);
+        // };
     };
 
     sm.init = function(onAllLoadedCb) {

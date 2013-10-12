@@ -4,17 +4,21 @@
     var P = w.P,
         ko = w.ko,
         s = {},
+        settingsKeys = [],
 
-        generateSettingGetter = function(name, startingVal, changeInterval, changeCb) {
-            var curVal = ko.observable(startingVal);
-            if (changeInterval) {
-                setInterval(function() {
-                    curVal(changeCb(curVal()));
-                }, changeInterval);
-            }
-
-            return curVal;
+    generateSettingGetter = function(name, startingVal, changeInterval, changeCb) {
+        var curVal = ko.observable(startingVal);
+        curVal.setToDefault = function () {
+            this(startingVal);
         };
+        if (changeInterval) {
+            setInterval(function() {
+                curVal(changeCb(curVal()));
+            }, changeInterval);
+        }
+        settingsKeys.push(curVal);
+        return curVal;
+    };
 
     s.init = function() {
         // degrees from each side of shot
@@ -28,6 +32,12 @@
         this.numberOfCreaturesAtTheBeginning = generateSettingGetter('NumberOfCreaturesAtTheBeginning', 1);
 
         return s;
+    };
+
+    s.restart = function() {
+        ko.utils.arrayForEach(settingsKeys, function(settingsKey) {
+            settingsKey.setToDefault();
+        });
     };
 
     s.debugMode = ko.observable(true);

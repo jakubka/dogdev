@@ -2,6 +2,7 @@
     'use strict';
 
     var P = w.P,
+        ko = w.ko,
         creatures = P.creaturesList,
         marian = new P.Player(),
         compass = P.compass,
@@ -32,7 +33,7 @@
         });
     });
 
-    creatures.creatureDied = function(c) {
+    creatures.onCreatureDied = function(c) {
         setTimeout(function() {
             creatures.generateCreature();
         }, settings.timeToRecreateCreature() * 1000);
@@ -41,19 +42,27 @@
         soundManager.stopCreatureNoise(c.id);
     };
 
-    creatures.creatureSpawned = function(c) {
-        P.soundManager.startCreatureNoise(c.id, calculateCreatureAngle(c), c.distanceFromPlayer())
-
-        c.moved = function() {
-            creatureRelativePositionChanged(c);
-        };
+    creatures.onCreatureSpawned = function(c) {
+        P.soundManager.startCreatureNoise(c.id, calculateCreatureAngle(c), c.distanceFromPlayer());
     };
 
-    creatures.creatureHitPlayer = function(c) {
-        marian.die();
+    creatures.onCreatureMoved = function(c) {
+        creatureRelativePositionChanged(c);
+    };
+
+    creatures.onCreatureHitPlayer = function(c) {
+        marian.takeDamage();
         soundManager.playCreatureHit();
-        soundManager.stopBackgroundMusic();
+        soundManager.stopCreatureNoise();
     };
+
+    marian.isAlive.subscribe(function(isAlive) {
+        if (!isAlive) {
+            game.stop();
+        }
+    });
+
+    game.started = ko.observable(false);
 
     game.shoot = function() {
         shot.shoot(marian.orientation(), creatures);
@@ -65,12 +74,22 @@
         creatures.init();
 
         soundManager.startBackgroundMusic();
+        game.started(true);
+    };
+
+    game.stop = function() {
+        soundManager.stopAll();
+        // TODO play game over
+        creatures.stop();
+        game.started(false);
     };
 
     game.restart = function() {
         marian.restart();
         creatures.restart();
+        settings.restart();
 
+        soundManager.stopAll();
         soundManager.startBackgroundMusic();
     };
 
