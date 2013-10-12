@@ -15,6 +15,7 @@
             this.compassNotAvailable = compass.compassNotAvailable;
             this.environmentInitialized = environmentInitialized;
             this.gameStarted = game.started;
+            this.playerIsDying = game.playerIsDying;
 
             this.settings = ko.observable(settings);
         };

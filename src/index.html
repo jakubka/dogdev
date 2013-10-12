@@ -10,7 +10,7 @@
 <div>
 </div>
 
-<body>
+<body data-bind="css: { blink: playerIsDying }">
     <p class="warning" data-bind="visible:compassNotAvailable">Compass not available</p>
     <i data-bind="visible:environmentInitialized() === false">Loading...</i>
     <button class="btn wide large red" data-bind="visible:environmentInitialized() && !gameStarted(),click:startApp">Begin!</button>

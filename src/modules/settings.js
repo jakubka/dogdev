@@ -6,19 +6,19 @@
         s = {},
         settingsKeys = [],
 
-    generateSettingGetter = function(name, startingVal, changeInterval, changeCb) {
-        var curVal = ko.observable(startingVal);
-        curVal.setToDefault = function () {
-            this(startingVal);
+        generateSettingGetter = function(name, startingVal, changeInterval, changeCb) {
+            var curVal = ko.observable(startingVal);
+            curVal.setToDefault = function() {
+                this(startingVal);
+            };
+            if (changeInterval) {
+                setInterval(function() {
+                    curVal(changeCb(curVal()));
+                }, changeInterval);
+            }
+            settingsKeys.push(curVal);
+            return curVal;
         };
-        if (changeInterval) {
-            setInterval(function() {
-                curVal(changeCb(curVal()));
-            }, changeInterval);
-        }
-        settingsKeys.push(curVal);
-        return curVal;
-    };
 
     s.init = function() {
         // degrees from each side of shot
