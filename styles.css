@@ -6,8 +6,8 @@ html, body {
 body {
     background: url('./img/loader.gif') no-repeat center center;
 }
-.blink {
-    background-color: black;
+.hidden {
+    display: none !important;
 }
 .warning {
     font-weight: bold;
@@ -26,6 +26,9 @@ body {
 }
 .mainWrapper.initialized {
     display: block;
+}
+.blink .mainWrapper.initialized {
+    background: #fff;
 }
 /* table */
  table {
@@ -78,4 +81,42 @@ table td {
     text-transform: uppercase;
     font-weight: bold;
     text-shadow: 0.1em 0.1em black;
+}
+.hitBtn {
+    background: url('./img/colt.png') no-repeat center;
+    background-size: auto 100%;
+    -webkit-transition: -webkit-transform 0s;
+}
+.hitBtn.hitting {
+    -webkit-transform: rotate(2deg);
+}
+/* status bar */
+ .statusBar {
+    position: absolute;
+    bottom: 0em;
+    right: 1em;
+    overflow: hidden;
+}
+.statusBar li {
+    float: right;
+    display: block;
+    margin-left: .5em;
+    color: #fff;
+    padding-left: 1.8em;
+    font-weight: bold;
+    font-size: .9em;
+}
+.statusBar li.highlight {
+    color: red;
+}
+.statusBar li.highlightGreen {
+    color: green;
+}
+.statusBar li.health {
+    background: url('./img/heartIco.png') no-repeat left top;
+    background-size: auto 100%;
+}
+.statusBar li.shooted {
+    background: url('./img/zombieIco.png') no-repeat left top;
+    background-size: auto 100%;
 }

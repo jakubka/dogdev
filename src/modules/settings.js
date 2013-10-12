@@ -40,7 +40,7 @@
         });
     };
 
-    s.debugMode = ko.observable(true);
+    s.debugMode = ko.observable(false);
 
     // expose module
     P.settings = s;

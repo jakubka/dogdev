@@ -48,7 +48,6 @@
     };
 
     creatures.onCreatureMoved = function(c) {
-        console.log("move");
         creatureRelativePositionChanged(c);
     };
 
@@ -56,8 +55,11 @@
         marian.takeDamage();
         soundManager.playCreatureHit();
         soundManager.stopCreatureNoise();
+
         game.playerIsDying(true);
-        console.log("hit");
+        setTimeout(function() {
+            game.playerIsDying(false);
+        }, 200);
     };
 
     marian.isAlive.subscribe(function(isAlive) {
@@ -67,11 +69,17 @@
     });
 
     game.playerIsDying = ko.observable(false);
+    game.playerIsHitting = ko.observable(false);
     game.started = ko.observable(false);
 
     game.shoot = function() {
         shot.shoot(marian.orientation(), creatures);
         soundManager.playShot();
+
+        game.playerIsHitting(true);
+        setTimeout(function() {
+            game.playerIsHitting(false);
+        }, 100);
     };
 
     game.start = function() {
