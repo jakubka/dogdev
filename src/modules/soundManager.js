@@ -18,19 +18,19 @@
                 log('start');
                 setTimeout(function() {
                     sound.play();
-                }, 3000);
+                }, 30000);
             },
             stop: function() {
                 log('stop');
                 setTimeout(function() {
                     sound.stop();
-                }, 3000);
+                }, 30000);
             },
             play: function() {
                 log('play');
                 setTimeout(function() {
                     sound.play();
-                }, 3000);
+                }, 30000);
             },
             changeDistanceAndAngle: function(orientation, distance) {
                 log('changeDistanceAndAngle');
