@@ -76,11 +76,10 @@
     };
 
     sm.stopAll = function() {
-        this.backgroundMusic.stop();
-        this.creatureHit.stop();
-        this.shot.stop();
+        ko.utils.arrayForEach(this.backgroundMusic, function(n) {n.stop();});
+        ko.utils.arrayForEach(this.creatureHit, function(n) {n.stop();});
+        ko.utils.arrayForEach(this.shot, function(n) {n.stop();});
         ko.utils.arrayForEach(this.creatureNoise, function(n) {n.stop();});
-        this.stopCreatureNoise();
     };
 
     sm.init = function(onAllLoadedCb) {
