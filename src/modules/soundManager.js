@@ -49,7 +49,8 @@
     };
 
     sm.playCreatureHit = function() {
-        this.creatureHit.start();
+        this.creatureHitId = Math.floor(Math.random() * this.creatureHit.length);
+        this.creatureHit[this.creatureHitId].start();
     };
 
     sm.playShot = function() {
@@ -78,24 +79,18 @@
         this.backgroundMusic.stop();
         this.creatureHit.stop();
         this.shot.stop();
-        this.creatureDie.stop();
-        this.creatureNoise.stop();
-
-        // var creatureIdsToRemove = [];
-        // for (var creatureId in creaturesNoises) {
-        //     if (object.hasOwnProperty(property)) {
-        //         creatureIdsToRemove.push(creatureId);
-        //     }
-        // }
-
-        // for (var i = creatureIdsToRemove.length - 1; i >= 0; i--) {
-        //     stopCreatureNoise(creatureIdsToRemove[i]);
-        // };
+        ko.utils.arrayForEach(this.creatureNoise, function(n) {n.stop();});
+        this.stopCreatureNoise();
     };
 
     sm.init = function(onAllLoadedCb) {
         this.backgroundMusic = createSoundInstance('../sounds/background_beating_heart.m4a', 1.0, true);
-        this.creatureHit = createSoundInstance('../sounds/zombie_bite_1.m4a', 0.6);
+        this.creatureHit = 
+            [
+                createSoundInstance('../sounds/zombie_bite_1.m4a', 0.6, false),
+                createSoundInstance('../sounds/zombie_bite_3.m4a', 0.6, false),
+                createSoundInstance('../sounds/zombie_bite_4.m4a', 0.6, false),
+            ]
         this.shot = createSoundInstance('../sounds/gun_fire_1.m4a', 0.4);
         this.creatureDie = 
             [
@@ -110,8 +105,11 @@
             ];
         // this.creaturesNoises = {}; // creatureId -> Sound
 
+
+
         this.creatureNoiseId = 1;
         this.creatureDieId = 0;
+        this.creatureHitId = 2;
 
         this.onAllLoadedCb = onAllLoadedCb;
     };
