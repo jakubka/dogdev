@@ -17,9 +17,11 @@
             }
         },
 
-        createSoundInstance = function(samplename) {
+        createSoundInstance = function(samplename, volume, loop) {
             soundsToLoad++;
-            var sound = new Sound(samplename, soundInstanceCreatedCb);
+            var sound = new Sound(samplename, soundInstanceCreatedCb, volume, loop);
+            
+
 
             return {
                 startSpatial: function(orientation, distance) {
@@ -39,69 +41,91 @@
 
 
     sm.startBackgroundMusic = function() {
-        this.backgroundMusic.start();
+        this.backgroundMusic[this.musicBackgroundId].start();
     };
 
     sm.stopBackgroundMusic = function() {
-        this.backgroundMusic.stop();
+        ko.utils.arrayForEach(this.backgroundMusic, function(n) {n.stop();});
     };
 
     sm.playCreatureHit = function() {
-        this.creatureHit.start();
+        this.creatureHitId = Math.floor(Math.random() * this.creatureHit.length);
+        this.creatureHit[this.creatureHitId].start();
     };
 
     sm.playShot = function() {
-        this.shot.start();
+        // this.shotId = ++this.shotId % this.shot.length;        
+        this.shot[this.shotId].start();
     };
 
     sm.playCreatureDie = function() {
-        this.creatureDie.start();
+        this.creatureDie[this.creatureDieId].start();
     };
 
+    sm.startCreatureCreate = function(creatureId, orientation, distance) {
+
+    }
+
     sm.startCreatureNoise = function(creatureId, orientation, distance) {
-        this.creatureNoise.startSpatial(orientation, distance);
-        // var noise = createSoundInstance('../sounds/zombie_walk_1.mp3');
-        // noise.startSpatial(orientation, distance);
-        // this.creaturesNoises[creatureId] = noise;
+        this.creatureNoise[this.creatureNoiseId].startSpatial(orientation, distance);
     };
 
     sm.stopCreatureNoise = function(creatureId) {
-        this.creatureNoise.stop();
-        // this.creaturesNoises[creatureId].stop();
-        // delete this.creaturesNoises[creatureId];
+        ko.utils.arrayForEach(this.creatureNoise, function(n) {
+            n.stop();
+        });
     };
 
     sm.changeCreatureNoise = function(creatureId, orientation, distance) {
-        this.creatureNoise.changeDistanceAndAngle(orientation, distance);
-        // this.creaturesNoises[creatureId].changeDistanceAndAngle(orientation, distance);
+        this.creatureNoise[this.creatureNoiseId].changeDistanceAndAngle(orientation, distance);
     };
 
     sm.stopAll = function() {
-        this.backgroundMusic.stop();
-        this.creatureHit.stop();
-        this.shot.stop();
-        this.creatureDie.stop();
-        this.creatureNoise.stop();
-
-        // var creatureIdsToRemove = [];
-        // for (var creatureId in creaturesNoises) {
-        //     if (object.hasOwnProperty(property)) {
-        //         creatureIdsToRemove.push(creatureId);
-        //     }
-        // }
-
-        // for (var i = creatureIdsToRemove.length - 1; i >= 0; i--) {
-        //     stopCreatureNoise(creatureIdsToRemove[i]);
-        // };
+        ko.utils.arrayForEach(this.backgroundMusic, function(n) {n.stop();});
+        ko.utils.arrayForEach(this.creatureHit, function(n) {n.stop();});
+        ko.utils.arrayForEach(this.shot, function(n) {n.stop();});
+        ko.utils.arrayForEach(this.creatureNoise, function(n) {n.stop();});
     };
 
     sm.init = function(onAllLoadedCb) {
-        this.backgroundMusic = createSoundInstance('../sounds/background_beating_heart.m4a');
-        this.creatureHit = createSoundInstance('../sounds/zombie_bite_1.m4a', 0.6);
-        this.shot = createSoundInstance('../sounds/gun_fire_1.m4a', 0.4);
-        this.creatureDie = createSoundInstance('../sounds/zombie_laugh_1.m4a', 0.6);
-        this.creatureNoise = createSoundInstance('../sounds/zombie_walk_1_long.m4a');
-        // this.creaturesNoises = {}; // creatureId -> Sound
+        this.backgroundMusic =
+            [
+                createSoundInstance('../sounds/background_beating_heart.m4a', 1.0, true),
+            ];
+        this.creatureHit = 
+            [
+                createSoundInstance('../sounds/zombie_bite_1.m4a', 0.6, false),
+                createSoundInstance('../sounds/zombie_bite_3.m4a', 0.6, false),
+                createSoundInstance('../sounds/zombie_bite_4.m4a', 0.6, false),
+            ];
+        this.shot = 
+            [
+                createSoundInstance('../sounds/gun_fire_1.m4a', 0.4, false),
+                createSoundInstance('../sounds/gun_fire_2.m4a', 0.6, false),
+                createSoundInstance('../sounds/gun_fire_3.m4a', 0.4, false),
+                createSoundInstance('../sounds/gun_fire_4.m4a', 0.6, false),
+                createSoundInstance('../sounds/gun_fire_5.m4a', 0.4, false),
+                createSoundInstance('../sounds/gun_fire_6.m4a', 0.8, false),
+                createSoundInstance('../sounds/gun_fire_8.m4a', 0.7, false),
+            ];
+        this.creatureDie = 
+            [
+                createSoundInstance('../sounds/zombie_kill_1.m4a', 0.6, false),
+                createSoundInstance('../sounds/zombie_kill_2.m4a', 0.3, false),
+            ];
+        this.creatureNoise = 
+            [
+                createSoundInstance('../sounds/zombie_walk_1_short.m4a', 1.0, true),
+                createSoundInstance('../sounds/zombie_walk_2_short.m4a', 1.0, true),
+                createSoundInstance('../sounds/zombie_walk_3_short.m4a', 1.0, true),
+            ];
+        
+
+        this.creatureNoiseId = 1;
+        this.creatureDieId = 0;
+        this.creatureHitId = 2;
+        this.musicBackgroundId = 0;
+        this.shotId = 6;
 
         this.onAllLoadedCb = onAllLoadedCb;
     };

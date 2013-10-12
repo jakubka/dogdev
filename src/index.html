@@ -7,97 +7,104 @@
     <link rel="stylesheet" href="../styles.css">
 </head>
 
-<div>
-</div>
+<body data-bind="css: { blink: playerIsDying }">
+    <div class="mainWrapper" data-bind="css: { initialized: environmentInitialized }">
+        <p class="warning" data-bind="visible:compassNotAvailable">Compass not available</p>
+        <button class="btn wide large red startBtn" data-bind="visible:!gameStarted(), click:startApp">
+            <span>Enter the Cave!</span>
+        </button>
 
-<body>
-    <p class="warning" data-bind="visible:compassNotAvailable">Compass not available</p>
-    <i data-bind="visible:environmentInitialized() === false">Loading...</i>
-    <button class="btn wide large red" data-bind="visible:environmentInitialized() && !gameStarted(),click:startApp">Begin!</button>
-    <button class="btn wide large green" data-bind="visible:gameStarted,click:shoot">Shoot!</button>
+        <div data-bind="visible: gameStarted">
+            <button class="btn wide large green" data-bind="click:shoot">Shoot!</button>
+            <ul>
+                <li>Health: 100</li>
+                <li>Shooted: 27</li>
+            </ul>
+        </div>
 
-    <div data-bind="if: settings().debugMode">
-        <table class="debug">
-            <tr>
-                <td>Orientation</td>
-                <td>
-                    <input type="range" min="0" max="360" data-bind="value: player.orientation" />
-                </td>
-            </tr>
-            <tr>
-                <td>Frags Count</td>
-                <td data-bind="text: player.fragsCount"></td>
-            </tr>
-            <tr>
-                <td>Health</td>
-                <td data-bind="text: player.health"></td>
-            </tr>
-            <tr>
-                <td>Orientation</td>
-                <td data-bind="text: player.orientation"></td>
-            </tr>
-            <tr>
-                <td>Settings['ShotDistanceTolerance']</td>
-                <td data-bind="text: settings().shotDistanceTolerance"></td>
-            </tr>
-            <tr>
-                <td>Settings['TimeToReachPlayer']</td>
-                <td data-bind="text: settings().timeToReachPlayer"></td>
-            </tr>
-            <tr>
-                <td>Settings['TimeToRecreateCreature']</td>
-                <td data-bind="text: settings().timeToRecreateCreature"></td>
-            </tr>
-            <tr>
-                <td>Settings['numberOfCreaturesAtTheBeginning']</td>
-                <td data-bind="text: settings().numberOfCreaturesAtTheBeginning"></td>
-            </tr>
-        </table>
+        <div data-bind="if: settings().debugMode">
+            <table class="debug">
+                <tr>
+                    <td>Orientation</td>
+                    <td>
+                        <input type="range" min="0" max="360" data-bind="value: player.orientation" />
+                    </td>
+                </tr>
+                <tr>
+                    <td>Frags Count</td>
+                    <td data-bind="text: player.fragsCount"></td>
+                </tr>
+                <tr>
+                    <td>Health</td>
+                    <td data-bind="text: player.health"></td>
+                </tr>
+                <tr>
+                    <td>Orientation</td>
+                    <td data-bind="text: player.orientation"></td>
+                </tr>
+                <tr>
+                    <td>Settings['ShotDistanceTolerance']</td>
+                    <td data-bind="text: settings().shotDistanceTolerance"></td>
+                </tr>
+                <tr>
+                    <td>Settings['TimeToReachPlayer']</td>
+                    <td data-bind="text: settings().timeToReachPlayer"></td>
+                </tr>
+                <tr>
+                    <td>Settings['TimeToRecreateCreature']</td>
+                    <td data-bind="text: settings().timeToRecreateCreature"></td>
+                </tr>
+                <tr>
+                    <td>Settings['numberOfCreaturesAtTheBeginning']</td>
+                    <td data-bind="text: settings().numberOfCreaturesAtTheBeginning"></td>
+                </tr>
+            </table>
+        </div>
+
+        <!-- module init -->
+        <script>
+        window.AudioContext = window.AudioContext || window.webkitAudioContext;
+        window.P = {};
+        </script>
+
+        <!-- libs -->
+        <script src="../lib/knockout/knockout.js"></script>
+        <script src="../lib/cp.js"></script>
+
+        <!-- modules -->
+        <script src="./modules/settings.js"></script>
+        <script src="./modules/bufferLoader.js"></script>
+        <script src="./modules/sound.js"></script>
+        <script src="./modules/shot.js"></script>
+        <script src="./modules/player.js"></script>
+        <script src="./modules/creature.js"></script>
+        <script src="./modules/creaturesList.js"></script>
+        <script src="./modules/compass.js"></script>
+        <script src="./modules/soundManager.js"></script>
+        <script src="./modules/game.js"></script>
+
+        <!-- main -->
+        <script src="./main.js"></script>
+
+        <!-- fast active -->
+        <script>
+        (function(a, c, d) {
+            if ("ontouchstart" in c || c.a && a instanceof DocumentTouch) {
+                var b = null,
+                    e = function() {
+                        b && (b.classList.remove(d), b = null)
+                    };
+                a.documentElement.classList.add("touch");
+                a.documentElement.classList.remove("no-touch");
+                a.body.addEventListener("touchstart", function(a) {
+                    e();
+                    "A" == a.target.tagName && (b = a.target, b.classList.add(d))
+                }, !1);
+                a.body.addEventListener("touchmove", e, !1)
+            } else a.documentElement.className += " no-touch"
+        })(document, window, "active");
+        </script>
     </div>
-
-    <!-- module init -->
-    <script>
-    window.AudioContext = window.AudioContext || window.webkitAudioContext;
-    window.P = {};
-    </script>
-
-    <!-- libs -->
-    <script src="../lib/knockout/knockout.js"></script>
-    <script src="../lib/cp.js"></script>
-
-    <!-- modules -->
-    <script src="./modules/settings.js"></script>
-    <script src="./modules/bufferLoader.js"></script>
-    <script src="./modules/sound.js"></script>
-    <script src="./modules/shot.js"></script>
-    <script src="./modules/player.js"></script>
-    <script src="./modules/creature.js"></script>
-    <script src="./modules/creaturesList.js"></script>
-    <script src="./modules/compass.js"></script>
-    <script src="./modules/soundManager.js"></script>
-    <script src="./modules/game.js"></script>
-
-    <!-- main -->
-    <script src="./main.js"></script>
-
-    <!-- fast active -->
-    <script>
-    (function(a, c, d) {
-        if ("ontouchstart" in c || c.a && a instanceof DocumentTouch) {
-            var b = null,
-                e = function() {
-                    b && (b.classList.remove(d), b = null)
-                };
-            a.documentElement.classList.add("touch");
-            a.documentElement.classList.remove("no-touch");
-            a.body.addEventListener("touchstart", function(a) {
-                e();
-                "A" == a.target.tagName && (b = a.target, b.classList.add(d))
-            }, !1);
-            a.body.addEventListener("touchmove", e, !1)
-        } else a.documentElement.className += " no-touch"
-    })(document, window, "active");
-    </script>
 </body>
 
 </html>

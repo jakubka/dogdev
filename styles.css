@@ -1,9 +1,31 @@
+html, body {
+    margin: 0;
+    width: 100%;
+    height: 100%;
+}
+body {
+    background: url('./img/loader.gif') no-repeat center center;
+}
+.blink {
+    background-color: black;
+}
 .warning {
     font-weight: bold;
     padding: 10px;
     border: 5px solid red;
     color: red;
     text-align: center;
+}
+.mainWrapper {
+    display: none;
+    width: 95%;
+    height: 95%;
+    padding: 2.5%;
+    position: absolute;
+    background: black url('./img/darkBg.png');
+}
+.mainWrapper.initialized {
+    display: block;
 }
 /* table */
  table {
@@ -18,6 +40,8 @@ table td {
     width: 100%;
 }
 .large {
+    padding-top: 4em;
+    padding-bottom: 4em;
     font-size: 3em;
 }
 .red {
@@ -37,4 +61,21 @@ table td {
 /* debug table */
  .debug td {
     border: 2px solid orange;
+}
+.startBtn {
+    background: rgba(200, 200, 200, .1) url('./img/zombie.png') no-repeat .5em bottom;
+    background-size: auto 90%;
+    border: .2em solid rgba(78, 78, 78, .5);
+    position: relative;
+}
+.startBtn span {
+    position: absolute;
+    top: 1.5em;
+    right: 1em;
+    display: block;
+    width: 40%;
+    color: rgb(78, 78, 78);
+    text-transform: uppercase;
+    font-weight: bold;
+    text-shadow: 0.1em 0.1em black;
 }

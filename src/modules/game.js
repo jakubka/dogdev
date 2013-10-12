@@ -40,6 +40,7 @@
         marian.fragsCount(marian.fragsCount() + 1);
         soundManager.playCreatureDie();
         soundManager.stopCreatureNoise(c.id);
+        game.playerIsDying(false);
     };
 
     creatures.onCreatureSpawned = function(c) {
@@ -54,6 +55,7 @@
         marian.takeDamage();
         soundManager.playCreatureHit();
         soundManager.stopCreatureNoise();
+        game.playerIsDying(true);
     };
 
     marian.isAlive.subscribe(function(isAlive) {
@@ -62,6 +64,7 @@
         }
     });
 
+    game.playerIsDying = ko.observable(false);
     game.started = ko.observable(false);
 
     game.shoot = function() {
