@@ -41,11 +41,11 @@
 
 
     sm.startBackgroundMusic = function() {
-        this.backgroundMusic.start();
+        this.backgroundMusic[this.musicBackgroundId].start();
     };
 
     sm.stopBackgroundMusic = function() {
-        this.backgroundMusic.stop();
+        ko.utils.arrayForEach(this.backgroundMusic, function(n) {n.stop();});
     };
 
     sm.playCreatureHit = function() {
@@ -54,12 +54,17 @@
     };
 
     sm.playShot = function() {
-        this.shot.start();
+        // this.shotId = ++this.shotId % this.shot.length;        
+        this.shot[this.shotId].start();
     };
 
     sm.playCreatureDie = function() {
         this.creatureDie[this.creatureDieId].start();
     };
+
+    sm.startCreatureCreate = function(creatureId, orientation, distance) {
+
+    }
 
     sm.startCreatureNoise = function(creatureId, orientation, distance) {
         this.creatureNoise[this.creatureNoiseId].startSpatial(orientation, distance);
@@ -83,32 +88,44 @@
     };
 
     sm.init = function(onAllLoadedCb) {
-        this.backgroundMusic = createSoundInstance('../sounds/background_beating_heart.m4a', 1.0, true);
+        this.backgroundMusic =
+            [
+                createSoundInstance('../sounds/background_beating_heart.m4a', 1.0, true),
+            ];
         this.creatureHit = 
             [
                 createSoundInstance('../sounds/zombie_bite_1.m4a', 0.6, false),
                 createSoundInstance('../sounds/zombie_bite_3.m4a', 0.6, false),
                 createSoundInstance('../sounds/zombie_bite_4.m4a', 0.6, false),
-            ]
-        this.shot = createSoundInstance('../sounds/gun_fire_1.m4a', 0.4);
+            ];
+        this.shot = 
+            [
+                createSoundInstance('../sounds/gun_fire_1.m4a', 0.4, false),
+                createSoundInstance('../sounds/gun_fire_2.m4a', 0.6, false),
+                createSoundInstance('../sounds/gun_fire_3.m4a', 0.4, false),
+                createSoundInstance('../sounds/gun_fire_4.m4a', 0.6, false),
+                createSoundInstance('../sounds/gun_fire_5.m4a', 0.4, false),
+                createSoundInstance('../sounds/gun_fire_6.m4a', 0.8, false),
+                createSoundInstance('../sounds/gun_fire_8.m4a', 0.7, false),
+            ];
         this.creatureDie = 
             [
                 createSoundInstance('../sounds/zombie_kill_1.m4a', 0.6, false),
                 createSoundInstance('../sounds/zombie_kill_2.m4a', 0.3, false),
-            ]
+            ];
         this.creatureNoise = 
             [
                 createSoundInstance('../sounds/zombie_walk_1_short.m4a', 1.0, true),
                 createSoundInstance('../sounds/zombie_walk_2_short.m4a', 1.0, true),
                 createSoundInstance('../sounds/zombie_walk_3_short.m4a', 1.0, true),
             ];
-        // this.creaturesNoises = {}; // creatureId -> Sound
-
-
+        
 
         this.creatureNoiseId = 1;
         this.creatureDieId = 0;
         this.creatureHitId = 2;
+        this.musicBackgroundId = 0;
+        this.shotId = 6;
 
         this.onAllLoadedCb = onAllLoadedCb;
     };
