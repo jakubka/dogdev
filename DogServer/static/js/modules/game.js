@@ -58,10 +58,12 @@
         soundManager.playCreatureDie();
         soundManager.stopCreatureNoise(c.id);
         game.playerIsDying(false);
+        sendGameState();
     };
 
     creatures.onCreatureSpawned = function(c) {
         P.soundManager.startCreatureNoise(c.id, calculateCreatureAngle(c), c.distanceFromPlayer());
+        sendGameState();
     };
 
     creatures.onCreatureMoved = function(c) {
@@ -72,6 +74,7 @@
         marian.takeDamage();
         soundManager.playCreatureHit();
         soundManager.stopCreatureNoise();
+        sendGameState();
 
         game.playerIsDying(true);
         setTimeout(function() {
@@ -82,6 +85,7 @@
     marian.isAlive.subscribe(function(isAlive) {
         if (!isAlive) {
             game.stop();
+            sendGameState();
         }
     });
 
@@ -104,17 +108,18 @@
 
         game.started(true);
         soundManager.startBackgroundMusic();
+        sendGameState();
 
-        setTimeout(function(n) {
+        setTimeout(function() {
             creatures.init();
         }, 3000);
     };
 
     game.stop = function() {
         soundManager.stopAll();
-        // TODO play game over
         creatures.stop();
         game.started(false);
+        sendGameState();
     };
 
     game.restart = function() {
@@ -124,10 +129,12 @@
 
         soundManager.stopAll();
         soundManager.startBackgroundMusic();
+        sendGameState();
     };
 
     game.changePlayerOrientation = function(orientation) {
         marian.orientation(orientation);
+        sendGameState();
     };
 
     game.creatures = creatures;
