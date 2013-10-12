@@ -6,14 +6,19 @@ html, body, canvas {
     text-align: center;
     position: relative;
 }
+
+body {
+    background-color: black;
+}
+
 span.compassIco {
     position: absolute;
     left: 50%;
     top: 50%;
     width: 22px;
     height: 22px;
-    margin-left: -13px;
-    margin-top: -13px;
+    margin-left: -5px;
+    margin-top: -5px;
     display: inline-block;
     border: 2px solid #000;
     border-radius: 50%;
