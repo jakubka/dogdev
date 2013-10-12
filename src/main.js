@@ -13,11 +13,14 @@
         };
 
     ViewModel.prototype.startApp = function() {
-        sm.init();
         compass.init(function(orientation) {
             game.changePlayerOrientation(orientation);
         });
         game.start();
+    };
+
+    ViewModel.prototype.playSound = function() {
+        sm.backgroundMusic.playSound();
     };
 
     ViewModel.prototype.shoot = function() {

@@ -14,23 +14,26 @@
         var sound = new CreateSound(samplename);
 
         return {
+            playSound: function() {
+                sound.play();
+            },
             start: function() {
                 // log('start');
-                setTimeout(function() {
-                    sound.play();
-                }, 3000);
+                // setTimeout(function() {
+                //     sound.play();
+                // }, 3000);
             },
             stop: function() {
                 // log('stop');
-                setTimeout(function() {
-                    sound.stop();
-                }, 3000);
+                // setTimeout(function() {
+                //     sound.stop();
+                // }, 3000);
             },
             play: function() {
                 // log('play');
-                setTimeout(function() {
-                    sound.play();
-                }, 3000);
+                // setTimeout(function() {
+                //     sound.play();
+                // }, 3000);
             },
             changeDistanceAndAngle: function(orientation, distance) {
                 // log('changeDistanceAndAngle');
@@ -100,6 +103,9 @@
         // this.creatureDie = createSoundInstance('../sounds/zombie_laugh_1.mp3');
         this.creaturesNoise = {}; // creatureId -> Sound
     };
+
+    // init immidiatelly
+    sm.init();
 
     // expose module
     P.soundManager = sm;
