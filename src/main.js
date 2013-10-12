@@ -9,7 +9,6 @@
         sm = P.soundManager,
         environmentInitialized = ko.observable(false),
         gameStarted = ko.observable(false),
-        debugMode = ko.observable(true),
 
         ViewModel = function() {
             this.player = game.currentPlayer;
@@ -17,12 +16,12 @@
             this.compassNotAvailable = compass.compassNotAvailable;
             this.environmentInitialized = environmentInitialized;
             this.gameStarted = gameStarted;
-            this.debugMode = debugMode;
 
-            this.settings = settings;
+            this.settings = ko.observable(settings);
         };
 
     ViewModel.prototype.startApp = function() {
+        this.settings(settings.init());
         gameStarted(true);
         game.start();
     };

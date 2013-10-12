@@ -16,15 +16,21 @@
             return curVal;
         };
 
-    // degrees from each side of shot
-    s.shotDistanceTolerance = generateSettingGetter('ShotDistanceTolerance', 40, 5000, function(val) {
-        return (val > 20 ? --val : val);
-    });
-    s.timeToReachPlayer = generateSettingGetter('TimeToReachPlayer', 20, 5000, function(val) {
-        return (val > 5 ? --val : val);
-    }); // seconds
-    s.timeToRecreateCreature = generateSettingGetter('TimeToRecreateCreature', 5); // seconds
-    s.numberOfCreaturesAtTheBeginning = generateSettingGetter('NumberOfCreaturesAtTheBeginning', 1);
+    s.init = function() {
+        // degrees from each side of shot
+        this.shotDistanceTolerance = generateSettingGetter('ShotDistanceTolerance', 40, 5000, function(val) {
+            return (val > 20 ? --val : val);
+        });
+        this.timeToReachPlayer = generateSettingGetter('TimeToReachPlayer', 20, 5000, function(val) {
+            return (val > 5 ? --val : val);
+        }); // seconds
+        this.timeToRecreateCreature = generateSettingGetter('TimeToRecreateCreature', 5); // seconds
+        this.numberOfCreaturesAtTheBeginning = generateSettingGetter('NumberOfCreaturesAtTheBeginning', 1);
+
+        return s;
+    };
+
+    s.debugMode = ko.observable(true);
 
     // expose module
     P.settings = s;

@@ -20,7 +20,7 @@
         <button class="btn wide large grey" data-bind="click:restart,visible:player.isAlive() === false">Restart!</button>
     </div>
 
-    <div data-bind="if: debugMode">
+    <div data-bind="if: settings().debugMode">
         <table class="debug">
             <tr>
                 <td>Orientation</td>
@@ -32,19 +32,19 @@
             </tr>
             <tr>
                 <td>Settings['ShotDistanceTolerance']</td>
-                <td data-bind="text: settings.shotDistanceTolerance"></td>
+                <td data-bind="text: settings().shotDistanceTolerance"></td>
             </tr>
             <tr>
                 <td>Settings['TimeToReachPlayer']</td>
-                <td data-bind="text: settings.timeToReachPlayer"></td>
+                <td data-bind="text: settings().timeToReachPlayer"></td>
             </tr>
             <tr>
                 <td>Settings['TimeToRecreateCreature']</td>
-                <td data-bind="text: settings.timeToRecreateCreature"></td>
+                <td data-bind="text: settings().timeToRecreateCreature"></td>
             </tr>
             <tr>
                 <td>Settings['numberOfCreaturesAtTheBeginning']</td>
-                <td data-bind="text: settings.numberOfCreaturesAtTheBeginning"></td>
+                <td data-bind="text: settings().numberOfCreaturesAtTheBeginning"></td>
             </tr>
         </table>
     </div>
