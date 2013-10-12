@@ -19,11 +19,9 @@
         game.start();
     };
 
+    sm.init(function() {});
     ViewModel.prototype.playSound = function() {
-        sm.init(function() {
-            sm.backgroundMusic.playSound();
-        });
-
+        sm.backgroundMusic.playSound();
     };
 
     ViewModel.prototype.shoot = function() {
