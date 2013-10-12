@@ -18,22 +18,22 @@
                 sound.play();
             },
             start: function() {
-                // log('start');
-                // setTimeout(function() {
-                //     sound.play();
-                // }, 3000);
+                log('start');
+                setTimeout(function() {
+                    sound.play();
+                }, 3000);
             },
             stop: function() {
-                // log('stop');
-                // setTimeout(function() {
-                //     sound.stop();
-                // }, 3000);
+                log('stop');
+                setTimeout(function() {
+                    sound.stop();
+                }, 3000);
             },
             play: function() {
-                // log('play');
-                // setTimeout(function() {
-                //     sound.play();
-                // }, 3000);
+                log('play');
+                setTimeout(function() {
+                    sound.play();
+                }, 3000);
             },
             changeDistanceAndAngle: function(orientation, distance) {
                 // log('changeDistanceAndAngle');
