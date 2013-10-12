@@ -80,6 +80,17 @@
         this.shot.stop();
         this.creatureDie.stop();
         this.creatureNoise.stop();
+
+        // var creatureIdsToRemove = [];
+        // for (var creatureId in creaturesNoises) {
+        //     if (object.hasOwnProperty(property)) {
+        //         creatureIdsToRemove.push(creatureId);
+        //     }
+        // }
+
+        // for (var i = creatureIdsToRemove.length - 1; i >= 0; i--) {
+        //     stopCreatureNoise(creatureIdsToRemove[i]);
+        // };
     };
 
     sm.init = function(onAllLoadedCb) {

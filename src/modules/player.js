@@ -11,6 +11,7 @@
             this.name = ko.observable();
             this.orientation = ko.observable();
             this.fragsCount = ko.observable();
+            this.health = ko.observable();
             this.isAlive = ko.observable();
         };
 
@@ -19,10 +20,14 @@
         this.orientation(this.orientation() || orientation);
         this.fragsCount(0);
         this.isAlive(true);
+        this.health(100);
     };
 
-    Player.prototype.die = function() {
-        this.isAlive(false);
+    Player.prototype.takeDamage = function() {
+        this.health(this.health() - 20);
+        if (this.health() <= 0) {
+            this.isAlive(false);
+        }
     };
 
     Player.prototype.restart = function() {

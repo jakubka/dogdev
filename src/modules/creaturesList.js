@@ -15,23 +15,22 @@
         }
     };
 
-    creatures.creatureDied = function(c) {};
-    creatures.creatureHitPlayer = function(c) {};
-    creatures.creatureSpawned = function(c) {};
-
     creatures.generateCreature = function() {
         var orientation = Math.floor(Math.random() * 360),
             c = new Creature(orientation);
 
         creatures.push(c);
         c.startMoving();
-        c.died = function() {
-            creatures.creatureDied(c);
+        c.onDied = function() {
+            creatures.onCreatureDied(c);
         };
-        c.hit = function() {
-            creatures.creatureHitPlayer(c);
+        c.onHit = function() {
+            creatures.onCreatureHitPlayer(c);
         };
-        creatures.creatureSpawned(c);
+        c.onMoved = function() {
+            creatures.onCreatureMoved(c);
+        };
+        creatures.onCreatureSpawned(c);
     };
 
     creatures.init = function() {
@@ -40,8 +39,15 @@
         }
     };
 
-    creatures.restart = function() {
+    creatures.stop = function() {
+        ko.utils.arrayForEach(creatures(), function(c) {
+            c.dispose();
+        });
         creatures.removeAll();
+    };
+
+    creatures.restart = function() {
+        creatures.stop();
         creatures.init();
     };
 

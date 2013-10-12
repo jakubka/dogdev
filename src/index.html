@@ -10,15 +10,11 @@
 <div>
 </div>
 
-<body>
+<body data-bind="css: { blink: playerIsDying }">
     <p class="warning" data-bind="visible:compassNotAvailable">Compass not available</p>
     <i data-bind="visible:environmentInitialized() === false">Loading...</i>
-    <button class="btn wide large red" data-bind="visible:environmentInitialized() && !gameStarted(),click:startApp">Run Game!</button>
-
-    <div data-bind="visible:gameStarted">
-        <button class="btn wide large green" data-bind="click:shoot,visible:player.isAlive">Shoot!</button>
-        <button class="btn wide large grey" data-bind="click:restart,visible:player.isAlive() === false">Restart!</button>
-    </div>
+    <button class="btn wide large red" data-bind="visible:environmentInitialized() && !gameStarted(),click:startApp">Begin!</button>
+    <button class="btn wide large green" data-bind="visible:gameStarted,click:shoot">Shoot!</button>
 
     <div data-bind="if: settings().debugMode">
         <table class="debug">
@@ -31,6 +27,10 @@
             <tr>
                 <td>Frags Count</td>
                 <td data-bind="text: player.fragsCount"></td>
+            </tr>
+            <tr>
+                <td>Health</td>
+                <td data-bind="text: player.health"></td>
             </tr>
             <tr>
                 <td>Orientation</td>
@@ -62,7 +62,6 @@
     </script>
 
     <!-- libs -->
-    <script src="../lib/zepto/zepto.js"></script>
     <script src="../lib/knockout/knockout.js"></script>
     <script src="../lib/cp.js"></script>
 
