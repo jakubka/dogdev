@@ -2,31 +2,29 @@
     'use strict';
 
     var P = w.P,
+        ko = w.ko,
         s = {},
 
         generateSettingGetter = function(name, startingVal, changeInterval, changeCb) {
-            var curVal = startingVal;
+            var curVal = ko.observable(startingVal);
             if (changeInterval) {
                 setInterval(function() {
-                    curVal = changeCb(curVal);
+                    curVal(changeCb(curVal()));
                 }, changeInterval);
             }
 
-            return function() {
-                console.log(name + " -> " + curVal);
-                return curVal;
-            }
+            return curVal;
         };
 
     // degrees from each side of shot
-    s.ShotDistanceTolerance = generateSettingGetter('ShotDistanceTolerance', 40, 5000, function(val) {
-        return (val >= 20 ? --val : val);
+    s.shotDistanceTolerance = generateSettingGetter('ShotDistanceTolerance', 40, 5000, function(val) {
+        return (val > 20 ? --val : val);
     });
-    s.TimeToReachPlayer = generateSettingGetter('TimeToReachPlayer', 20, 5000, function(val) {
-        return (val >= 5 ? --val : val);
+    s.timeToReachPlayer = generateSettingGetter('TimeToReachPlayer', 20, 5000, function(val) {
+        return (val > 5 ? --val : val);
     }); // seconds
-    s.TimeToRecreateCreature = generateSettingGetter('TimeToRecreateCreature', 3); // seconds
-    s.NumberOfCreaturesAtTheBeginning = generateSettingGetter('NumberOfCreaturesAtTheBeginning', 1);
+    s.timeToRecreateCreature = generateSettingGetter('TimeToRecreateCreature', 5); // seconds
+    s.numberOfCreaturesAtTheBeginning = generateSettingGetter('NumberOfCreaturesAtTheBeginning', 1);
 
     // expose module
     P.settings = s;

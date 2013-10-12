@@ -7,6 +7,7 @@
 /* table */
  table {
     width: 100%;
+    margin: 2em 0;
     border-collapse: collapse;
 }
 table td {
@@ -31,4 +32,8 @@ table td {
  .btn {
     border: none;
     height: 2em;
+}
+/* debug table */
+ .debug td {
+    border: 2px solid orange;
 }

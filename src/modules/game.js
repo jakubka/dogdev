@@ -35,7 +35,7 @@
     creatures.creatureDied = function(c) {
         setTimeout(function() {
             creatures.generateCreature();
-        }, settings.TimeToRecreateCreature * 1000);
+        }, settings.timeToRecreateCreature() * 1000);
         marian.fragsCount(marian.fragsCount() + 1);
         soundManager.playCreatureDie();
         soundManager.stopCreatureNoise(c.id);

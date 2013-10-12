@@ -23,7 +23,7 @@
         };
 
     Creature.prototype.moveCloser = function() {
-        var newDistance = this.distanceFromPlayer() - (100 / s.TimeToReachPlayer);
+        var newDistance = this.distanceFromPlayer() - (100 / s.timeToReachPlayer());
         this.distanceFromPlayer(Math.max(newDistance, 0));
         this.moved(this);
     };

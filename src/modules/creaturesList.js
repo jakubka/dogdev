@@ -35,7 +35,7 @@
     };
 
     creatures.init = function() {
-        for (var i = 0; i < settings.NumberOfCreaturesAtTheBeginning(); i++) {
+        for (var i = 0; i < settings.numberOfCreaturesAtTheBeginning(); i++) {
             creatures.generateCreature();
         }
     };

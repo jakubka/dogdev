@@ -4,10 +4,12 @@
     var P = w.P,
         doc = w.document,
         compass = P.compass,
+        settings = P.settings,
         game = P.game,
         sm = P.soundManager,
         environmentInitialized = ko.observable(false),
         gameStarted = ko.observable(false),
+        debugMode = ko.observable(true),
 
         ViewModel = function() {
             this.player = game.currentPlayer;
@@ -15,6 +17,9 @@
             this.compassNotAvailable = compass.compassNotAvailable;
             this.environmentInitialized = environmentInitialized;
             this.gameStarted = gameStarted;
+            this.debugMode = debugMode;
+
+            this.settings = settings;
         };
 
     ViewModel.prototype.startApp = function() {
