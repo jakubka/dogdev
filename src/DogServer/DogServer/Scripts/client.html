@@ -1,0 +1,31 @@
+﻿<html>
+
+    <head>
+        <script src="jquery-1.6.4.js"> </script>
+        <script src="jquery.signalR-1.1.3.js"> </script>
+        <script src="../signalr/hubs"> </script>
+        <script type="text/javascript">
+            $(function() {
+                var presentationHub = $.connection.presentationHub;
+                $.connection.hub.start().done(function() {
+
+                    $("#btnLogState").click(function() {
+                        var state = {
+                            IsGameStarted: true,
+                            PlayerOrientation: 123,
+                            PlayerHealth: 4,
+                            CreatureOrientation: null,
+                            CreatureDistance: 65,
+                            FragsCount: 0
+                        };
+
+                        presentationHub.server.logState(state);
+                    });
+                });
+            });
+        </script>
+    </head>
+    <body>
+        <button id="btnLogState">Log state</button>
+    </body>
+</html>

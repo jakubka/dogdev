@@ -1,0 +1,20 @@
+﻿<html>
+
+    <head>
+        <script src="jquery-1.6.4.js"> </script>
+        <script src="jquery.signalR-1.1.3.js"> </script>
+        <script src="../signalr/hubs"> </script>
+        <script type="text/javascript">
+            $(function() {
+                var presentationHub = $.connection.presentationHub;
+                presentationHub.client.displayState = function(state) {
+                    alert(state.PlayerOrientation);
+                };
+                $.connection.hub.start();
+            });
+        </script>
+    </head>
+    <body>
+
+    </body>
+</html>
