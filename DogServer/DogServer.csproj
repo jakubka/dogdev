@@ -282,7 +282,6 @@
       <DependentUpon>Web.config</DependentUpon>
     </Content>
     <Content Include="sounds\smp.ogg" />
-    <Content Include="sounds\web.config" />
   </ItemGroup>
   <ItemGroup />
   <ItemGroup>
