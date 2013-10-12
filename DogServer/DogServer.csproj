@@ -131,7 +131,6 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="Global.asax" />
-    <Content Include="img\Thumbs.db" />
     <Content Include="index.html" />
     <None Include="Scripts\jquery-1.6.4-vsdoc.js" />
     <Content Include="img\axe.jpg" />
