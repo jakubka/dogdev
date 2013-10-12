@@ -13,7 +13,7 @@
         // 0 vymenit za jmena
         this.regenerateSoundFromBuffer();
         this.changeEvent(angle, distance);
-        this.sound.src.start(0);
+        this.sound.src.noteOn(0);
     };
 
     CreateSounds.prototype.stop = function() {
