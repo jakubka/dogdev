@@ -1,14 +1,16 @@
 (function(w) {
     'use strict';
 
-    var fabric = w.fabric,
+    var P = w.P,
+        fabric = w.fabric,
         doc = w.document,
+        $ = w.$,
         canvasWidth = window.innerWidth,
         canvasHeight = window.innerHeight,
         canvasXMid = canvasWidth / 2,
         canvasYMid = canvasHeight / 2,
         canvas = new fabric.Canvas('c'),
-        boundaryCirc, compassImg;
+        boundaryCirc;
 
     // set canvas to stretch to window
     canvas.setWidth(canvasWidth);
@@ -24,15 +26,8 @@
         stroke: 'grey'
     });
 
-    // create compass object
-    compassImg = new fabric.Image(doc.getElementById('compass'), {
-        left: canvasXMid,
-        top: canvasYMid
-    });
-
     // "add" rectangle onto canvas
     canvas.add(boundaryCirc);
-    canvas.add(compassImg);
 
     // setTimeout(function() {
     //     boundaryCirc.set({
