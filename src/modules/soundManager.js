@@ -4,18 +4,20 @@
     var P = w.P,
         ko = w.ko,
         s = P.settings,
-        CreateSound = P.CreateSounds,
+        Sound = P.Sound,
         sm = {};
 
     var createSoundInstance = function(samplename) {
         var log = function(actionName) {
             console.log('SoundManager ' + samplename + ' action ' + actionName);
         };
-        var sound = new CreateSound(samplename);
+        var sound = new Sound(samplename);
 
         return {
-            playSound: function() {
-                sound.play();
+            playSound: function(orientation, distance) {
+                sound.regenerateSoundFromBuffer();
+                sound.changeSoundPosition(orientation, distance);
+                sound.sound.source.start(0);
             },
             start: function() {
                 log('start');
@@ -97,7 +99,8 @@
     };
 
     sm.init = function() {
-        this.backgroundMusic = createSoundInstance('../sounds/zombie_bite_1.mp3');
+        //this.backgroundMusic = createSoundInstance('../sounds/smp.ogg');
+        this.backgroundMusic = createSoundInstance('../sounds/zombie_bite_1.m4a');
         // this.creatureHit = createSoundInstance('../sounds/zombie_bite_1.mp3');
         // this.shot = createSoundInstance('../sounds/gun_fire_1.mp3');
         // this.creatureDie = createSoundInstance('../sounds/zombie_laugh_1.mp3');
