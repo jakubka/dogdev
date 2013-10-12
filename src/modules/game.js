@@ -55,7 +55,11 @@
         marian.takeDamage();
         soundManager.playCreatureHit();
         soundManager.stopCreatureNoise();
+
         game.playerIsDying(true);
+        setTimeout(function() {
+            game.playerIsDying(false);
+        }, 200);
     };
 
     marian.isAlive.subscribe(function(isAlive) {
