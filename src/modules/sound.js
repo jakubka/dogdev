@@ -22,7 +22,6 @@
         this.regenerateSoundFromBuffer();
         this.changeSoundPosition(angle, distance);
         this.sound.source.start(0);
-        
         this.sound.source.loop = this.loop;
     }
 
@@ -37,6 +36,7 @@
         // Clamp azimuth to allowed range of -180 -> +180.
         azimuth = Math.max(-180, azimuth);
         azimuth = Math.min(180, azimuth);
+        console.log("dist: " + newDistance);
 
         var s = this.sound;
         var x;

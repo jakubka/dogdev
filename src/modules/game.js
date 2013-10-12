@@ -48,6 +48,7 @@
     };
 
     creatures.onCreatureMoved = function(c) {
+        console.log("move");
         creatureRelativePositionChanged(c);
     };
 
@@ -56,6 +57,7 @@
         soundManager.playCreatureHit();
         soundManager.stopCreatureNoise();
         game.playerIsDying(true);
+        console.log("hit");
     };
 
     marian.isAlive.subscribe(function(isAlive) {
