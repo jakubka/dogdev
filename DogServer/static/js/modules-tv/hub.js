@@ -1,3 +1,4 @@
+
 (function(w) {
     'use strict';
 
@@ -14,7 +15,7 @@
             creatureDistance: Math.floor(Math.random() * 100),
             fragsCount: 12
         });
-    }, 1000);
+    }, 3000);
 
     hub.init = function(onDataReceived) {
         this.onDataReceived = onDataReceived;
