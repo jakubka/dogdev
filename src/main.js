@@ -8,6 +8,7 @@
         game = P.game,
         sm = P.soundManager,
         environmentInitialized = ko.observable(false),
+        vm,
 
         ViewModel = function() {
             this.player = game.currentPlayer;
@@ -23,6 +24,7 @@
     ViewModel.prototype.startApp = function() {
         this.settings(settings.init());
         game.start();
+        this.initialized(true);
     };
 
     ViewModel.prototype.shoot = function() {
