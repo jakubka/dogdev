@@ -5,10 +5,10 @@
         ko = w.ko,
         creatures = P.creaturesList,
         marian = new P.Player(),
-        compass = P.compass,
         shot = P.shot,
         settings = P.settings,
         soundManager = P.soundManager,
+        logsSender = P.logsSender,
         game = {};
 
     var calculateCreatureAngle = function(c) {
@@ -23,8 +23,25 @@
         return result;
     };
 
+    var sendGameState = function () {
+        var firstCreature = creatures.getFirstCreature();
+
+        var gameState = {
+            IsGameStarted: game.started(),
+            PlayerOrientation: marian.orientation(),
+            PlayerHealth: marian.health(),
+            FragsCount: marian.fragsCount(),
+            CreatureOrientation: firstCreature != null ? firstCreature.orientation() : null,
+            CreatureDistance: firstCreature != null ? firstCreature.distanceFromPlayer() : null
+        };
+
+        logsSender.sendGameState(gameState);
+    };
+
     var creatureRelativePositionChanged = function(c) {
         soundManager.changeCreatureNoise(c.id, calculateCreatureAngle(c), c.distanceFromPlayer());
+
+        sendGameState();
     };
 
     marian.orientation.subscribe(function(newOrientation) {
@@ -85,12 +102,12 @@
     game.start = function() {
         marian.init("Marian", 111);
 
-        game.started(true);    
-        soundManager.startBackgroundMusic();    
-        
+        game.started(true);
+        soundManager.startBackgroundMusic();
+
         setTimeout(function(n) {
-            creatures.init();    
-        }, 3000);        
+            creatures.init();
+        }, 3000);
     };
 
     game.stop = function() {

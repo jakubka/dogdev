@@ -2,15 +2,14 @@
     'use strict';
 
     var P = w.P,
-        doc = w.document,
         compass = P.compass,
         settings = P.settings,
         game = P.game,
         sm = P.soundManager,
         environmentInitialized = ko.observable(false),
-        vm,
+        logsSender = P.logsSender,
 
-        ViewModel = function() {
+        ViewModel = function () {
             this.player = game.currentPlayer;
             this.creatures = game.creatures;
             this.compassNotAvailable = compass.compassNotAvailable;
@@ -42,6 +41,8 @@
     compass.init(function(orientation) {
         game.changePlayerOrientation(orientation);
     });
+
+    logsSender.init();
 
     ko.applyBindings(new ViewModel());
 

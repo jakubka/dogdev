@@ -51,6 +51,13 @@
         creatures.init();
     };
 
+    creatures.getFirstCreature = function() {
+        if (creatures().length === 0) {
+            return null;
+        }
+        return creatures()[0];
+    };
+
     // expose module
     P.creaturesList = creatures;
 

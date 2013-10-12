@@ -1,27 +1,17 @@
-(function (w) {
+(function(w) {
     'use strict';
 
     var P = w.P,
-        logsSender = {};
+        logsSender = {},
+        presentationHub = $.connection.presentationHub;
 
-    logsSender.init = function (onDataReceived) {
-        var presentationHub = $.connection.presentationHub;
-        $.connection.hub.start().done(function () {
+    logsSender.sendGameState = function (gameState) {
+        console.log(gameState);
+        presentationHub.server.logState(gameState);
+    };
 
-            $("#btnLogState").click(function () {
-                var state = {
-                    IsGameStarted: true,
-                    PlayerOrientation: 123,
-                    PlayerHealth: 4,
-                    CreatureOrientation: null,
-                    CreatureDistance: 65,
-                    FragsCount: 0
-                };
-
-                presentationHub.server.logState(state);
-            });
-        });
-
+    logsSender.init = function() {
+        $.connection.hub.start();
     };
 
     // expose module
