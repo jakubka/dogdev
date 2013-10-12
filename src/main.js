@@ -21,9 +21,6 @@
 
     ViewModel.prototype.playSound = function() {
         sm.backgroundMusic.playSound();
-        setTimeout(function() {
-            sm.backgroundMusic.playSound();
-        }, 3000)
     };
 
     ViewModel.prototype.shoot = function() {
