@@ -2,9 +2,11 @@
     'use strict';
 
     var P = w.P,
+        doc = w.document,
         compass = P.compass,
         game = P.game,
         sm = P.soundManager,
+        vm,
 
         ViewModel = function() {
             this.player = game.currentPlayer;
@@ -13,14 +15,18 @@
         };
 
     ViewModel.prototype.startApp = function() {
+        // simmulate user's click to play first sound
+        var startBtn = doc.getElementById("start");
+        start.click();
+
         compass.init(function(orientation) {
             game.changePlayerOrientation(orientation);
         });
         game.start();
     };
 
-    ViewModel.prototype.playSound = function() {
-        sm.backgroundMusic.playSound();
+    ViewModel.prototype.startClicked = function() {
+        sm.onStartMusic.play();
     };
 
     ViewModel.prototype.shoot = function() {
@@ -31,7 +37,14 @@
         game.restart();
     };
 
-    sm.init(function() {});
-    ko.applyBindings(new ViewModel());
+    vm = new ViewModel();
+    ko.applyBindings(vm);
+    sm.init(function() {
+        vm.startApp();
+    });
+
+    // sm.init, dej mu jako callback startovani hry
+    // clickni na button
+    // pust prehrani libovolneho zvuku
 
 }(this));
