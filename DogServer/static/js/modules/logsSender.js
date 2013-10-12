@@ -3,15 +3,18 @@
 
     var P = w.P,
         logsSender = {},
-        presentationHub = $.connection.presentationHub;
+        presentationHub = $.connection.presentationHub,
+        initialized = false;
 
     logsSender.sendGameState = function (gameState) {
         console.log(gameState);
-        presentationHub.server.logState(gameState);
+        initialized && presentationHub.server.logState(gameState);
     };
 
     logsSender.init = function() {
-        $.connection.hub.start();
+        $.connection.hub.start().done(function() {
+            initialized = true;
+        });
     };
 
     // expose module
