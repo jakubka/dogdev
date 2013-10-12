@@ -92,6 +92,9 @@ table td {
 }
 /* status bar */
  .statusBar {
+    position: absolute;
+    bottom: 0em;
+    right: 1em;
     overflow: hidden;
 }
 .statusBar li {
