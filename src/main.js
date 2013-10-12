@@ -20,7 +20,10 @@
     };
 
     ViewModel.prototype.playSound = function() {
-        sm.backgroundMusic.playSound();
+        sm.init(function() {
+            sm.backgroundMusic.playSound();
+        });
+
     };
 
     ViewModel.prototype.shoot = function() {
