@@ -15,7 +15,7 @@
         </button>
 
         <div data-bind="visible: gameStarted">
-            <button class="btn wide large green" data-bind="click:shoot">Shoot!</button>
+            <button class="btn wide large green hitBtn" data-bind="click:shoot, css : { hitting: playerIsHitting }"></button>
             <ul class="statusBar">
                 <li data-bind="text: player.health, css: { highlight : playerIsDying }" class="health">100</li>
                 <li data-bind="text: player.fragsCount" class="shooted">27</li>

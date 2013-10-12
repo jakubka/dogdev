@@ -69,11 +69,17 @@
     });
 
     game.playerIsDying = ko.observable(false);
+    game.playerIsHitting = ko.observable(false);
     game.started = ko.observable(false);
 
     game.shoot = function() {
         shot.shoot(marian.orientation(), creatures);
         soundManager.playShot();
+
+        game.playerIsHitting(true);
+        setTimeout(function() {
+            game.playerIsHitting(false);
+        }, 100);
     };
 
     game.start = function() {

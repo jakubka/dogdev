@@ -6,6 +6,9 @@ html, body {
 body {
     background: url('./img/loader.gif') no-repeat center center;
 }
+.hidden {
+    display: none !important;
+}
 .warning {
     font-weight: bold;
     padding: 10px;
@@ -78,6 +81,14 @@ table td {
     text-transform: uppercase;
     font-weight: bold;
     text-shadow: 0.1em 0.1em black;
+}
+.hitBtn {
+    background: url('./img/colt.png') no-repeat center;
+    background-size: auto 100%;
+    -webkit-transition: -webkit-transform 0s;
+}
+.hitBtn.hitting {
+    -webkit-transform: rotate(2deg);
 }
 /* status bar */
  .statusBar {

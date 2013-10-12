@@ -17,6 +17,7 @@
             this.environmentInitialized = environmentInitialized;
             this.gameStarted = game.started;
             this.playerIsDying = game.playerIsDying;
+            this.playerIsHitting = game.playerIsHitting;
 
             this.settings = ko.observable(settings);
         };
