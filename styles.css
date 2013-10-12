@@ -1,5 +1,10 @@
+html, body {
+    margin: 0;
+    width: 100%;
+    height: 100%;
+}
 body {
-    background-color: white;
+    background: url('./img/loader.gif') no-repeat center center;
 }
 .blink {
     background-color: black;
@@ -10,6 +15,16 @@ body {
     border: 5px solid red;
     color: red;
     text-align: center;
+}
+.mainWrapper {
+    display: none;
+}
+.mainWrapper.initialized {
+    display: block;
+    background-color: white;
+    width: 100%;
+    height: 100%;
+    position: absolute;
 }
 /* table */
  table {
