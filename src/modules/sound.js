@@ -36,24 +36,33 @@
         // Clamp azimuth to allowed range of -180 -> +180.
         azimuth = Math.max(-180, azimuth);
         azimuth = Math.min(180, azimuth);
-        console.log("dist: " + newDistance);
-
+        
         var s = this.sound;
         var x;
         var distanceMultiplyier = Math.max(1 - (newDistance / 100), 0.4); // 0.4 is minimum
 
-        if (azimuth < 30 && azimuth > -30) {
-            s.gainLeft.value = 1;
-            s.gainRight.value = 1;
-        } else if (azimuth >= 30) {
-            x = 1 - azimuth / 180;
-            s.gainRight.value = x * 1.1;
-            s.gainLeft.value = Math.max(x - 0.5, 0);
-        } else if (azimuth <= -30) {
-            x = 1 - azimuth / (-180);
-            s.gainLeft.value = x * 1.1;
-            s.gainRight.value = Math.max(x - 0.5, 0);
-        }
+        
+
+        // if (azimuth < 30 && azimuth > -30) {
+        //     s.gainLeft.value = 1;
+        //     s.gainRight.value = 1;
+        // } else if (azimuth >= 30) {
+        //     // x = 1 - azimuth / 180;
+        //     // s.gainRight.value = x * 1.1;
+        //     // s.gainLeft.value = Math.max(x - 0.5, 0);
+        //     s.gainRight.value   = Math.cos(x / 180.0 * math.PI);
+        //     s.gainLeft.value    = Math.sin(x / 180.0 * math.PI);
+        // } else if (azimuth <= -30) {
+        //     x = 1 - azimuth / (-180);
+        //     s.gainLeft.value = x * 1.1;
+        //     s.gainRight.value = Math.max(x - 0.5, 0);
+        // }
+
+
+        this.sound.gainRight.value  = Math.cos(0.5*(azimuth-90) / 180*Math.PI);
+        this.sound.gainLeft.value   = Math.cos(0.5*(azimuth+90) / 180*Math.PI);
+        console.log("angle: " + azimuth + " l: " + s.gainLeft.value + " r: " + s.gainRight.value);
+
         this.sound.gainLeft.value *= distanceMultiplyier;
         this.sound.gainRight.value *= distanceMultiplyier;
     };
