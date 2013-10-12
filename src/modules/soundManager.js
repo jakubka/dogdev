@@ -4,16 +4,22 @@
     var P = w.P,
         ko = w.ko,
         s = P.settings,
-        //Sound = P.Sound,
+        CreateSound = P.CreateSounds,
         sm = {};
 
     var createSoundInstance = function(samplename) {
         var log = function(actionName) {
             console.log('SoundManager ' + samplename + ' action ' + actionName);
         };
+        var sound = new CreateSound(samplename);
+
         return {
             start: function() {
                 log('start');
+                setTimeout(function() {
+                    sound.play();
+                }, 3000);
+
             },
             stop: function() {
                 log('stop');
@@ -30,10 +36,10 @@
         //return new Sound(samplename);
     };
 
-    var backgroundMusic = createSoundInstance('background.mp3'),
-        creatureHit = createSoundInstance('hit.mp3'),
-        shot = createSoundInstance('shot.mp3'),
-        creatureDie = createSoundInstance('creatureDie.mp3'),
+    var backgroundMusic = createSoundInstance('../sounds/zombie1_l.mp3'),
+        //creatureHit = createSoundInstance('hit.mp3'),
+        //shot = createSoundInstance('shot.mp3'),
+        //creatureDie = createSoundInstance('creatureDie.mp3'),
         creaturesNoise = {}; // creatureId -> Sound
 
     sm.startBackgroundMusic = function() {
@@ -45,22 +51,22 @@
     };
 
     sm.playCreatureHit = function() {
-        creatureHit.play();
+        //creatureHit.play();
     };
 
     sm.playShot = function() {
-        shot.play();
+        //shot.play();
     };
 
     sm.playCreatureDie = function() {
-        creatureDie.play();
+        //creatureDie.play();
     };
 
     sm.startCreatureNoise = function(creatureId, orientation, distance) {
-        var noise = createSoundInstance('creature.mp3');
-        noise.start();
-        noise.changeDistanceAndAngle(orientation, distance);
-        creaturesNoise[creatureId] = noise;
+        // var noise = createSoundInstance('creature.mp3');
+        // noise.start();
+        // noise.changeDistanceAndAngle(orientation, distance);
+        // creaturesNoise[creatureId] = noise;
     };
 
     sm.stopCreatureNoise = function(creatureId) {
@@ -69,7 +75,7 @@
     };
 
     sm.changeCreatureNoise = function(creatureId, orientation, distance) {
-        creaturesNoise[creatureId].changeDistanceAndAngle(orientation, distance);
+        // creaturesNoise[creatureId].changeDistanceAndAngle(orientation, distance);
     };
 
     sm.stopAll = function() {

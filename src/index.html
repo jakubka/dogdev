@@ -39,6 +39,7 @@
 
     <!-- module init -->
     <script>
+    window.AudioContext = window.AudioContext || window.webkitAudioContext;
     window.P = {};
     </script>
 
@@ -49,6 +50,8 @@
 
     <!-- modules -->
     <script src="./modules/settings.js"></script>
+    <script src="./modules/bufferLoader.js"></script>
+    <script src="./modules/sound.js"></script>
     <script src="./modules/shot.js"></script>
     <script src="./modules/player.js"></script>
     <script src="./modules/creature.js"></script>
