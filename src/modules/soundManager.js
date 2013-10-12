@@ -94,7 +94,7 @@
     };
 
     sm.init = function() {
-        this.backgroundMusic = createSoundInstance('../sounds/zombie1_l.mp3');
+        this.backgroundMusic = createSoundInstance('../sounds/zombie_bite_1.mp3');
         // this.creatureHit = createSoundInstance('../sounds/zombie_bite_1.mp3');
         // this.shot = createSoundInstance('../sounds/gun_fire_1.mp3');
         // this.creatureDie = createSoundInstance('../sounds/zombie_laugh_1.mp3');
