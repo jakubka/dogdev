@@ -9,27 +9,13 @@
         environmentInitialized = ko.observable(false),
         gameStarted = ko.observable(false),
 
-        acc_x = ko.observable(),
-        acc_y = ko.observable(),
-        acc_z = ko.observable(),
-
         ViewModel = function() {
             this.player = game.currentPlayer;
             this.creatures = game.creatures;
             this.compassNotAvailable = compass.compassNotAvailable;
             this.environmentInitialized = environmentInitialized;
             this.gameStarted = gameStarted;
-
-            this.acc_x = acc_x;
-            this.acc_y = acc_y;
-            this.acc_z = acc_z;
         };
-
-    window.ondevicemotion = function (e) {
-        acc_x(e.accelerationIncludingGravity.x);
-        acc_y(e.accelerationIncludingGravity.y);
-        acc_z(e.accelerationIncludingGravity.z);
-    };
 
     ViewModel.prototype.startApp = function() {
         gameStarted(true);
