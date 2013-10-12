@@ -14,9 +14,11 @@
             this.distanceFromPlayer = ko.observable(100);
             this.orientation = ko.observable(orientation);
             this.distanceFromPlayer.subscribe(function(distanceFromPlayer) {
-                if (distanceFromPlayer === 0) {
+                if (distanceFromPlayer === 1) {
                     that.hit && that.hit();
-                    clearInterval(that.intervalId);
+
+                    console.log('zabila mie');
+                    // clearInterval(that.intervalId);
                 }
             });
             this.moved = function(c) {};
@@ -24,7 +26,10 @@
 
     Creature.prototype.moveCloser = function() {
         var newDistance = this.distanceFromPlayer() - (100 / s.timeToReachPlayer());
-        this.distanceFromPlayer(Math.max(newDistance, 0));
+        if (newDistance > 1) {
+            this.distanceFromPlayer(Math.max(newDistance, 1));
+        }
+
         this.moved(this);
     };
 
