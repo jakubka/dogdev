@@ -42,7 +42,7 @@
     };
 
     creatures.creatureSpawned = function(c) {
-        soundManager.startCreatureNoise(c.id, calculateCreatureAngle(c), c.distanceFromPlayer())
+        P.soundManager.startCreatureNoise(c.id, calculateCreatureAngle(c), c.distanceFromPlayer())
 
         c.moved = function() {
             creatureRelativePositionChanged(c);

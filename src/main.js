@@ -4,6 +4,7 @@
     var P = w.P,
         compass = P.compass,
         game = P.game,
+        sm = P.soundManager,
 
         ViewModel = function() {
             this.player = game.currentPlayer;
@@ -12,6 +13,7 @@
         };
 
     ViewModel.prototype.startApp = function() {
+        sm.init();
         compass.init(function(orientation) {
             game.changePlayerOrientation(orientation);
         });

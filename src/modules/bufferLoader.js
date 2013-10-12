@@ -22,6 +22,7 @@
         var loader = this;
 
         request.onload = function() {
+            console.log('request.onload');
             // Asynchronously decode the audio file data in request.response
             loader.context.decodeAudioData(
                 request.response,
@@ -30,6 +31,7 @@
                         alert('error decoding file data: ' + url);
                         return;
                     }
+                    console.log('data decoded');
                     bufferList[url] = buffer;
                     loader.onload(buffer);
                 },
