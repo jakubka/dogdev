@@ -24,11 +24,17 @@
         <table class="debug">
             <tr>
                 <td>Orientation</td>
-                <td data-bind="text: player.orientation"></td>
+                <td>
+                    <input type="range" min="0" max="360" data-bind="value: player.orientation" />
+                </td>
             </tr>
             <tr>
                 <td>Frags Count</td>
                 <td data-bind="text: player.fragsCount"></td>
+            </tr>
+            <tr>
+                <td>Orientation</td>
+                <td data-bind="text: player.orientation"></td>
             </tr>
             <tr>
                 <td>Settings['ShotDistanceTolerance']</td>
