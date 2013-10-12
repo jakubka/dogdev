@@ -16,7 +16,6 @@ namespace DogServer
         {
             RouteTable.Routes.MapHubs();
             AreaRegistration.RegisterAllAreas();
-            RouteConfig.RegisterRoutes(RouteTable.Routes);
         }
     }
 }
