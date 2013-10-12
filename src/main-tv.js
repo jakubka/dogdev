@@ -8,12 +8,12 @@
         hub = P.hub,
         canvasWidth = window.innerWidth,
         canvasHeight = window.innerHeight,
-        maxDistanceFromPlayer = (canvasWidth - 20) / 2,
+        maxDistanceFromPlayer = (canvasWidth - 500) / 2,
         canvasXMid = canvasWidth / 2,
         canvasYMid = canvasHeight / 2,
         canvas = new fabric.Canvas('c'),
         $compass = $(".compassIco"),
-        boundaryCirc, zombiePoint;
+        boundaryCirc, zombiePoint, movingLine;
 
     // set canvas to stretch to window
     canvas.setWidth(canvasWidth);
@@ -29,6 +29,11 @@
         stroke: 'grey'
     });
 
+    movingLine = new fabric.Line([canvasXMid, canvasYMid, canvasXMid + maxDistanceFromPlayer, canvasYMid], {
+        stroke: 'red',
+        strokeWidth: 5
+    });
+
     zombiePoint = new fabric.Circle({
         fill: 'red',
         radius: 5,
@@ -37,6 +42,35 @@
     // "add" items into canvas
     canvas.add(boundaryCirc);
     canvas.add(zombiePoint);
+    canvas.add(movingLine);
+
+    (function animate() {
+        //setInterval(animate, 2000);
+
+        fabric.util.animate({
+            startValue: 0,
+            endValue: 360,
+            duration: 2500,
+            easing: function(t, b, c, d) { return c*t/d + b; },
+            onChange: function(angle) {
+                angle = fabric.util.degreesToRadians(angle);
+                var x = canvasXMid + maxDistanceFromPlayer * Math.cos(angle);
+                var y = canvasYMid + maxDistanceFromPlayer * Math.sin(angle);
+
+                movingLine.set({
+                    x2: x,
+                    y2: y
+                }).setCoords();
+
+                
+
+                canvas.renderAll();
+            },
+            onComplete: animate
+
+        });
+    })();
+
 
     hub.init(function(data) {
         // update compass

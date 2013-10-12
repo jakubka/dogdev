@@ -84,10 +84,13 @@
 
     game.start = function() {
         marian.init("Marian", 111);
-        creatures.init();
 
-        soundManager.startBackgroundMusic();
-        game.started(true);
+        game.started(true);    
+        soundManager.startBackgroundMusic();    
+        
+        setTimeout(function(n) {
+            creatures.init();    
+        }, 3000);        
     };
 
     game.stop = function() {

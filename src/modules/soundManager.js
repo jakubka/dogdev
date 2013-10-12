@@ -98,9 +98,9 @@
         this.backgroundMusic =
             [
                 createSoundInstance('../sounds/background_beating_heart.m4a', 1.0, true),
-                createSoundInstance('../sounds/background_level_1.m4a', 0.3, true),
-                createSoundInstance('../sounds/background_level_2.m4a', 0.4, true),
-                createSoundInstance('../sounds/background_level_3.m4a', 0.3, true),
+                createSoundInstance('../sounds/background_level_1.m4a', 0.2, true),
+                createSoundInstance('../sounds/background_level_2.m4a', 0.3, true),
+                createSoundInstance('../sounds/background_level_3.m4a', 0.2, true),
             ];
         this.gameOver = 
             [
@@ -108,7 +108,7 @@
             ];
         this.introMusic = 
             [
-                createSoundInstance('../sounds/intro_level_1.m4a', 0.5, false),
+                createSoundInstance('../sounds/intro_level_1.m4a', 0.4, false),
             ];
         //-----------------------------------------------------------------------------------------
          this.shot = 
@@ -144,11 +144,11 @@
             ];
         this.creatureStart = 
             [
-                createSoundInstance('../sounds/zombie_laugh_1.m4a', 1.0, false),
-                createSoundInstance('../sounds/zombie_laugh_2.m4a', 1.0, false),
-                createSoundInstance('../sounds/zombie_start_2.m4a', 1.0, false),
-                createSoundInstance('../sounds/zombie_start_3.m4a', 1.0, false),
-                createSoundInstance('../sounds/zombie_talk_1.m4a', 1.0, false),
+                createSoundInstance('../sounds/zombie_laugh_1.m4a', 0.3, false),
+                createSoundInstance('../sounds/zombie_laugh_2.m4a', 0.3, false),
+                createSoundInstance('../sounds/zombie_start_2.m4a', 0.3, false),
+                createSoundInstance('../sounds/zombie_start_3.m4a', 0.3, false),
+                createSoundInstance('../sounds/zombie_talk_1.m4a', 0.3, false),
             ];
         //-----------------------------------------------------------------------------------------        
         
