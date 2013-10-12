@@ -2,12 +2,31 @@
     'use strict';
 
     var P = w.P,
-        s = {};
+        s = {},
 
-    s.ShotDistanceTolerance = 40; // degrees from each side of shot
-    s.TimeToReachPlayer = 20; // seconds
-    s.TimeToRecreateCreature = 3; // seconds
-    s.NumberOfCreaturesAtTheBeginning = 1;
+        generateSettingGetter = function(name, startingVal, changeInterval, changeCb) {
+            var curVal = startingVal;
+            if (changeInterval) {
+                setInterval(function() {
+                    curVal = changeCb(curVal);
+                }, changeInterval);
+            }
+
+            return function() {
+                console.log(name + " -> " + curVal);
+                return curVal;
+            }
+        };
+
+    // degrees from each side of shot
+    s.ShotDistanceTolerance = generateSettingGetter('ShotDistanceTolerance', 40, 5000, function(val) {
+        return (val >= 20 ? --val : val);
+    });
+    s.TimeToReachPlayer = generateSettingGetter('TimeToReachPlayer', 20, 5000, function(val) {
+        return (val >= 5 ? --val : val);
+    }); // seconds
+    s.TimeToRecreateCreature = generateSettingGetter('TimeToRecreateCreature', 3); // seconds
+    s.NumberOfCreaturesAtTheBeginning = generateSettingGetter('NumberOfCreaturesAtTheBeginning', 1);
 
     // expose module
     P.settings = s;

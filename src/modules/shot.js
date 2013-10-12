@@ -11,9 +11,10 @@
             creaturesToKill = [];
 
         ko.utils.arrayForEach(creaturesArray, function(creature) {
-            var shotDistance = Math.abs(shotOrientation - creature.orientation());
+            var shotDistance = Math.abs(shotOrientation - creature.orientation()),
+                shotDistanceTolerance = s.ShotDistanceTolerance();
 
-            if (shotDistance < s.ShotDistanceTolerance || shotDistance > (360 - s.ShotDistanceTolerance)) {
+            if (shotDistance < shotDistanceTolerance || shotDistance > (360 - shotDistanceTolerance)) {
                 creaturesToKill.push(creature);
             }
         });
