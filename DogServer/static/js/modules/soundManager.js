@@ -3,7 +3,7 @@
 
     var P = w.P,
         ko = w.ko,
-        s = P.settings,
+        settings = P.settings,
         Sound = P.Sound,
         sm = {},
         soundsToLoad = 0,
@@ -19,10 +19,8 @@
 
         createSoundInstance = function(samplename, volume, loop) {
             soundsToLoad++;
-            var sound = new Sound(samplename, soundInstanceCreatedCb, volume, loop);
+            var sound = new Sound(settings.soundsRootDir + samplename, soundInstanceCreatedCb, volume, loop);
             
-
-
             return {
                 startSpatial: function(orientation, distance) {
                     sound.startSpatial(orientation, distance);
@@ -97,38 +95,38 @@
         //-----------------------------------------------------------------------------------------
         this.backgroundMusic =
             [
-                createSoundInstance('../sounds/background_beating_heart.m4a', 1.0, true),
-                createSoundInstance('../sounds/background_level_1.m4a', 0.2, true),
-                createSoundInstance('../sounds/background_level_2.m4a', 0.3, true),
-                createSoundInstance('../sounds/background_level_3.m4a', 0.2, true),
+                createSoundInstance('background_beating_heart.m4a', 1.0, true),
+                createSoundInstance('background_level_1.m4a', 0.2, true),
+                createSoundInstance('background_level_2.m4a', 0.3, true),
+                createSoundInstance('background_level_3.m4a', 0.2, true),
             ];
         this.gameOver = 
             [
-                createSoundInstance('../sounds/game_over.m4a', 1.0, false),
+                createSoundInstance('game_over.m4a', 1.0, false),
             ];
         this.introMusic = 
             [
-                createSoundInstance('../sounds/intro_level_1.m4a', 0.4, false),
+                createSoundInstance('intro_level_1.m4a', 0.4, false),
             ];
-        //-----------------------------------------------------------------------------------------
+        //-------------------------------------------------------------------------------
          this.shot = 
             [
-                createSoundInstance('../sounds/gun_fire_1.m4a', 0.4, false),
-                createSoundInstance('../sounds/gun_fire_2.m4a', 0.6, false),
-                createSoundInstance('../sounds/gun_fire_3.m4a', 0.4, false),
-                createSoundInstance('../sounds/gun_fire_4.m4a', 0.6, false),
-                createSoundInstance('../sounds/gun_fire_5.m4a', 0.4, false),
-                createSoundInstance('../sounds/gun_fire_6.m4a', 0.8, false),
-                createSoundInstance('../sounds/gun_fire_8.m4a', 0.7, false),
+                createSoundInstance('gun_fire_1.m4a', 0.4, false),
+                createSoundInstance('gun_fire_2.m4a', 0.6, false),
+                createSoundInstance('gun_fire_3.m4a', 0.4, false),
+                createSoundInstance('gun_fire_4.m4a', 0.6, false),
+                createSoundInstance('gun_fire_5.m4a', 0.4, false),
+                createSoundInstance('gun_fire_6.m4a', 0.8, false),
+                createSoundInstance('gun_fire_8.m4a', 0.7, false),
             ];
 
-        //-----------------------------------------------------------------------------------------
+        //-------------------------------------------------------------------------------
         this.creatureHit = 
             [
-                createSoundInstance('../sounds/zombie_bite_1.m4a', 0.6, false),
-                createSoundInstance('../sounds/zombie_bite_3.m4a', 0.6, false),
-                createSoundInstance('../sounds/zombie_bite_4.m4a', 0.6, false),
-                createSoundInstance('../sounds/zombie_bite_5.m4a', 0.6, false),
+                createSoundInstance('zombie_bite_1.m4a', 0.6, false),
+                createSoundInstance('zombie_bite_3.m4a', 0.6, false),
+                createSoundInstance('zombie_bite_4.m4a', 0.6, false),
+                createSoundInstance('zombie_bite_5.m4a', 0.6, false),
             ];
        
         this.creatureDie = 

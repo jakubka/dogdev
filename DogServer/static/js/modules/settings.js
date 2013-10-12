@@ -42,6 +42,9 @@
 
     s.debugMode = ko.observable(false);
 
+    s.root = '/DogServer/';
+    s.soundsRootDir = s.root + 'static/sounds/';
+
     // expose module
     P.settings = s;
 

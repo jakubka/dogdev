@@ -4,7 +4,7 @@ html, body {
     height: 100%;
 }
 body {
-    background: url('./img/loader.gif') no-repeat center center;
+    background: url('../img/loader.gif') no-repeat center center;
 }
 .hidden {
     display: none !important;
@@ -22,7 +22,7 @@ body {
     height: 95%;
     padding: 2.5%;
     position: absolute;
-    background: black url('./img/darkBg.png');
+    background: black url('../img/darkBg.png');
 }
 .mainWrapper.initialized {
     display: block;
@@ -66,7 +66,7 @@ table td {
     border: 2px solid orange;
 }
 .startBtn {
-    background: rgba(200, 200, 200, .1) url('./img/zombie.png') no-repeat .5em bottom;
+    background: rgba(200, 200, 200, .1) url('../img/zombie.png') no-repeat .5em bottom;
     background-size: auto 90%;
     border: .2em solid rgba(78, 78, 78, .5);
     position: relative;
@@ -83,7 +83,7 @@ table td {
     text-shadow: 0.1em 0.1em black;
 }
 .hitBtn {
-    background: url('./img/colt.png') no-repeat center;
+    background: url('../img/colt.png') no-repeat center;
     background-size: auto 100%;
     -webkit-transition: -webkit-transform 0s;
 }
@@ -113,10 +113,10 @@ table td {
     color: green;
 }
 .statusBar li.health {
-    background: url('./img/heartIco.png') no-repeat left top;
+    background: url('../img/heartIco.png') no-repeat left top;
     background-size: auto 100%;
 }
 .statusBar li.shooted {
-    background: url('./img/zombieIco.png') no-repeat left top;
+    background: url('../img/zombieIco.png') no-repeat left top;
     background-size: auto 100%;
 }
