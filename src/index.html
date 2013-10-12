@@ -29,17 +29,13 @@
                 <td data-bind="text: player.fragsCount"></td>
             </tr>
         </table>
-
-        <div>Creatures:
-            <ul data-bind="foreach:creatures">
-                <li>
-                    <span data-bind="text:id"></span>->
-                    <span data-bind="text:orientation"></span>->
-                    <span data-bind="text:distanceFromPlayer"></span>
-                </li>
-            </ul>
-        </div>
     </div>
+
+    <ul>
+		<li>accelerometer x: <span data-bind="text:acc_x"></span></li>
+		<li>accelerometer y: <span data-bind="text:acc_y"></span></li>
+		<li>accelerometer z: <span data-bind="text:acc_z"></span></li>
+    </ul>
 
     <!-- module init -->
     <script>
