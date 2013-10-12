@@ -5,7 +5,7 @@
         fabric = w.fabric,
         doc = w.document,
         $ = w.$,
-        hub = P.hub,
+        hub = P.logsReceiver,
         canvasWidth = window.innerWidth,
         canvasHeight = window.innerHeight,
         maxDistanceFromPlayer = (canvasWidth - 500) / 2,
@@ -13,7 +13,7 @@
         canvasYMid = canvasHeight / 2,
         canvas = new fabric.Canvas('c'),
         $compass = $(".compassIco"),
-        boundaryCirc, zombiePoint, movingLine, zombieVisible, crossLine1, crossLine2, innerCirc1, innerCirc2;
+        boundaryCirc, zombiePoint, movingLine, zombieVisible, crossLine1, crossLine2, innerCirc1, innerCirc2,triangle;
 
     // set canvas to stretch to window
     canvas.setWidth(canvasWidth);
@@ -45,8 +45,27 @@
         radius: maxDistanceFromPlayer * 0.7,
         strokeWidth: 1,
         stroke: 'green',
-        strokeDashArray: [10, 5]
+        strokeDashArray: [10, 5],
     });
+
+    
+    triangle = new fabric.Triangle({
+        width: 200, 
+        height: 300, 
+        fill: 'blue', 
+        left: canvasXMid, 
+        top: canvasYMid + 100, 
+        angle: 90,
+        rotatingPointOffset: 400,
+    });
+    triangle.setGradient('fill', { type:'radial',x1: 5, y1: 5, x2: 50, y2: 10, r1: 20, r2: 70, colorStops: { '0.2': 'rgba(0,100,0,0.5)', '0.7': 'rgba(0,153,153,0.5)'} });
+    
+
+
+ 
+
+
+
 
     crossLine1 = new fabric.Line([canvasXMid, canvasYMid - maxDistanceFromPlayer - 10, canvasXMid, canvasYMid + maxDistanceFromPlayer + 10], {stroke: 'green',strokeWidth: 1,strokeDashArray: [10, 5]});
     crossLine2 = new fabric.Line([canvasXMid - maxDistanceFromPlayer - 10, canvasYMid, canvasXMid + maxDistanceFromPlayer + 10, canvasYMid], {stroke: 'green',strokeWidth: 1,strokeDashArray: [10, 5]});
@@ -57,7 +76,7 @@
     });
 
     zombiePoint = new fabric.Circle({
-        fill: 'green',
+        fill: 'red',
         radius: 5,
         opacity: 0,
     });
@@ -72,6 +91,11 @@
     canvas.add(crossLine2);
     canvas.add(innerCirc1);
     canvas.add(innerCirc2);
+    canvas.add(triangle);
+    
+
+    
+
 
     (function animate() {
         //setInterval(animate, 2000);
@@ -120,7 +144,6 @@
 
     hub.init(function(data) {
         // update compass
-        $compass.style.top = 10;
         $compass.css('-webkit-transform', 'rotate(' + (-data.playerOrientation) + 'deg)');
 
         var x = (data.creatureDistance / 100 * maxDistanceFromPlayer * Math.cos((data.creatureOrientation - 90) / 180 * Math.PI)) + canvasXMid;
@@ -129,7 +152,8 @@
         // update zombie
         zombiePoint.set({
             left: x,
-            top: y
+            top: y,
+            opacity: 0,
         });
 
         // update canvas
