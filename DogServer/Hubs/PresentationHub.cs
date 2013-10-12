@@ -27,7 +27,6 @@ namespace DogServer.Hubs
     {
         public void LogState(State state)
         {
-
             Clients.Others.displayState(state);
         }
     }
