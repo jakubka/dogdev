@@ -5,18 +5,28 @@
         ko = w.ko,
         s = P.settings,
         Sound = P.Sound,
-        sm = {};
+        sm = {},
+        soundsToLoad = 0,
+        onAllLoadedCbCalled = false,
 
     var createSoundInstance = function(samplename) {
-        var log = function(actionName) {
-            console.log('SoundManager ' + samplename + ' action ' + actionName);
-        };
         var sound = new Sound(samplename);
+        soundInstanceCreatedCb = function() {
+            soundsToLoad--;
+            setTimeout(function() {
+                if (!onAllLoadedCbCalled && soundsToLoad === 0) {
+                    // jsou stazene vsechny zvuky
+                    onAllLoadedCbCalled = true;
+                    console.log('sound loaded');
+                    sm.onAllLoadedCb && sm.onAllLoadedCb();
+                }
+            }, 200);
+        },
 
-        return {
-            playSound: function(orientation, distance) {
-                sound.regenerateSoundFromBuffer();
-                sound.changeSoundPosition(orientation, distance);
+        createSoundInstance = function(samplename) {
+            soundsToLoad++;
+
+            var sound = new CreateSound(samplename, soundInstanceCreatedCb);
                 sound.sound.source.start(0);
             },
             start: function() {
@@ -29,26 +39,18 @@
                 log('stop');
                 setTimeout(function() {
                     sound.stop();
-                }, 3000);
-            },
-            play: function() {
-                log('play');
-                setTimeout(function() {
+                },
+                play: function() {
                     sound.play();
-                }, 3000);
-            },
-            changeDistanceAndAngle: function(orientation, distance) {
-                // log('changeDistanceAndAngle');
-                console.log('orientation: ' + orientation + ' distance: ' + distance);
-            }
+                },
+                changeDistanceAndAngle: function(orientation, distance) {
+                    // console.log('orientation: ' + orientation + ' distance: ' + distance);
+                }
+            };
         };
 
-        //return new Sound(samplename);
-    };
-
-
     sm.startBackgroundMusic = function() {
-        this.backgroundMusic.start();
+        this.backgroundMusic.play();
     };
 
     sm.stopBackgroundMusic = function() {
@@ -56,31 +58,30 @@
     };
 
     sm.playCreatureHit = function() {
-        // this.creatureHit.play();
+        this.creatureHit.play();
     };
 
     sm.playShot = function() {
-        // this.shot.play();
+        this.shot.play();
     };
 
     sm.playCreatureDie = function() {
-        // this.creatureDie.play();
+        this.creatureDie.play();
     };
 
     sm.startCreatureNoise = function(creatureId, orientation, distance) {
-        // var noise = createSoundInstance('../sounds/zombie_walk_1.mp3');
-        // noise.start();
-        // noise.changeDistanceAndAngle(orientation, distance);
-        // this.creaturesNoise[creatureId] = noise;
+        this.noise.play();
+        this.noise.changeDistanceAndAngle(orientation, distance);
+        this.creaturesNoise[creatureId] = this.noise;
     };
 
     sm.stopCreatureNoise = function(creatureId) {
-        // this.creaturesNoise[creatureId].stop();
-        // delete this.creaturesNoise[creatureId];
+        this.creaturesNoise[creatureId].stop();
+        delete this.creaturesNoise[creatureId];
     };
 
     sm.changeCreatureNoise = function(creatureId, orientation, distance) {
-        // this.creaturesNoise[creatureId].changeDistanceAndAngle(orientation, distance);
+        this.creaturesNoise[creatureId].changeDistanceAndAngle(orientation, distance);
     };
 
     sm.stopAll = function() {
@@ -98,17 +99,17 @@
         };
     };
 
-    sm.init = function() {
+    sm.init = function(onAllLoadedCb) {
+        this.onStartMusic = createSoundInstance('../sounds/zombie_bite_3.mp3');
         //this.backgroundMusic = createSoundInstance('../sounds/smp.ogg');
         this.backgroundMusic = createSoundInstance('../sounds/zombie_bite_1.m4a');
-        // this.creatureHit = createSoundInstance('../sounds/zombie_bite_1.mp3');
-        // this.shot = createSoundInstance('../sounds/gun_fire_1.mp3');
-        // this.creatureDie = createSoundInstance('../sounds/zombie_laugh_1.mp3');
+        this.creatureHit = createSoundInstance('../sounds/zombie_bite_1.mp3');
+        this.shot = createSoundInstance('../sounds/gun_fire_1.mp3');
+        this.creatureDie = createSoundInstance('../sounds/zombie_laugh_1.mp3');
+        this.noise = createSoundInstance('../sounds/zombie_walk_1.mp3');
         this.creaturesNoise = {}; // creatureId -> Sound
+        this.onAllLoadedCb = onAllLoadedCb;
     };
-
-    // init immidiatelly
-    sm.init();
 
     // expose module
     P.soundManager = sm;

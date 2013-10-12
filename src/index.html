@@ -11,11 +11,9 @@
 </div>
 
 <body>
+    <i id="start" data-bind="click:startClicked"></i>
     <p class="warning" data-bind="visible:compassNotAvailable">Compass not available</p>
     <button class="btn red" data-bind="click:startApp">Run Game!</button>
-    <button class="btn red" data-bind="click:playSound">Play Soundd!</button>
-	<input type="text" data-bind="value:orientation"/>
-
     <button class="btn wide large green" data-bind="click:shoot,visible:player.isAlive">Shoot!</button>
     <button class="btn wide large grey" data-bind="click:restart,visible:player.isAlive() === false">Restart!</button>
 
@@ -63,8 +61,27 @@
     <script src="./modules/soundManager.js"></script>
     <script src="./modules/game.js"></script>
 
-    <!-- our files -->
+    <!-- main -->
     <script src="./main.js"></script>
+
+    <!-- fast active -->
+    <script>
+    (function(a, c, d) {
+        if ("ontouchstart" in c || c.a && a instanceof DocumentTouch) {
+            var b = null,
+                e = function() {
+                    b && (b.classList.remove(d), b = null)
+                };
+            a.documentElement.classList.add("touch");
+            a.documentElement.classList.remove("no-touch");
+            a.body.addEventListener("touchstart", function(a) {
+                e();
+                "A" == a.target.tagName && (b = a.target, b.classList.add(d))
+            }, !1);
+            a.body.addEventListener("touchmove", e, !1)
+        } else a.documentElement.className += " no-touch"
+    })(document, window, "active");
+    </script>
 </body>
 
 </html>
