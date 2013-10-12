@@ -17,10 +17,10 @@
                 playerOrientation: Math.floor(Math.random() * 360),
                 playerHealth: 80,
                 creatureOrientation: Math.floor(Math.random() * 360),
-                creatureDistance: Math.floor(Math.random() * 100),
+                creatureDistance: 100,
                 fragsCount: 12
             });
-        }, 1000);
+        }, 8000);
     };
 
     // expose module
