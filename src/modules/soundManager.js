@@ -51,7 +51,7 @@
     };
 
     sm.playCreatureHit = function() {
-        this.creatureHitId = Math.floor(Math.random() * this.creatureHit.length);
+        // this.creatureHitId = Math.floor(Math.random() * this.creatureHit.length);
         this.creatureHit[this.creatureHitId].start();
     };
 
@@ -128,6 +128,7 @@
                 createSoundInstance('../sounds/zombie_bite_1.m4a', 0.6, false),
                 createSoundInstance('../sounds/zombie_bite_3.m4a', 0.6, false),
                 createSoundInstance('../sounds/zombie_bite_4.m4a', 0.6, false),
+                createSoundInstance('../sounds/zombie_bite_5.m4a', 0.6, false),
             ];
        
         this.creatureDie = 
@@ -154,7 +155,7 @@
 
         this.creatureNoiseId = 0;
         this.creatureDieId = 0;
-        this.creatureHitId = 2;
+        this.creatureHitId = 3;
         this.musicBackgroundId = 3;
         this.shotId = 6;
         this.gameOverId = 0;
