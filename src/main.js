@@ -24,7 +24,6 @@
     ViewModel.prototype.startApp = function() {
         this.settings(settings.init());
         game.start();
-        this.initialized(true);
     };
 
     ViewModel.prototype.shoot = function() {

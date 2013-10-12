@@ -10,9 +10,17 @@
 <body data-bind="css: { blink: playerIsDying }">
     <div class="mainWrapper" data-bind="css: { initialized: environmentInitialized }">
         <p class="warning" data-bind="visible:compassNotAvailable">Compass not available</p>
-        <i data-bind="visible:environmentInitialized() === false">Loading...</i>
-        <button class="btn wide large red" data-bind="visible:environmentInitialized() && !gameStarted(),click:startApp">Begin!</button>
-        <button class="btn wide large green" data-bind="visible:gameStarted,click:shoot">Shoot!</button>
+        <button class="btn wide large red startBtn" data-bind="visible:!gameStarted(), click:startApp">
+            <span>Enter the Cave!</span>
+        </button>
+
+        <div data-bind="visible: gameStarted">
+            <button class="btn wide large green" data-bind="click:shoot">Shoot!</button>
+            <ul>
+                <li>Health: 100</li>
+                <li>Shooted: 27</li>
+            </ul>
+        </div>
 
         <div data-bind="if: settings().debugMode">
             <table class="debug">

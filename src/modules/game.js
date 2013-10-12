@@ -40,6 +40,7 @@
         marian.fragsCount(marian.fragsCount() + 1);
         soundManager.playCreatureDie();
         soundManager.stopCreatureNoise(c.id);
+        game.playerIsDying(false);
     };
 
     creatures.onCreatureSpawned = function(c) {
@@ -55,9 +56,6 @@
         soundManager.playCreatureHit();
         soundManager.stopCreatureNoise();
         game.playerIsDying(true);
-        setTimeout(function() {
-            game.playerIsDying(false);
-        }, 100);
     };
 
     marian.isAlive.subscribe(function(isAlive) {
