@@ -18,7 +18,7 @@
         var newDistance = this.distanceFromPlayer() - (100 / s.timeToReachPlayer());
         if (newDistance > 1) {
             this.distanceFromPlayer(newDistance);
-            this.onMove && this.onMove(this);
+            this.onMoved && this.onMoved(this);
         } else {
             this.onHit && this.onHit();
         }
