@@ -11,6 +11,13 @@
             this.compassNotAvailable = compass.compassNotAvailable;
         };
 
+    ViewModel.prototype.startApp = function() {
+        compass.init(function(orientation) {
+            game.changePlayerOrientation(orientation);
+        });
+        game.start();
+    };
+
     ViewModel.prototype.shoot = function() {
         game.shoot();
     };
@@ -19,11 +26,7 @@
         game.restart();
     };
 
-    compass.init(function(orientation) {
-        game.changePlayerOrientation(orientation);
-    });
 
-    game.start();
     ko.applyBindings(new ViewModel());
 
 }(this));
