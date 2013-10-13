@@ -13,14 +13,14 @@
         
         setInterval(function () {
             onDataReceived && onDataReceived({
-                isGameStarted: true,
-                playerOrientation: Math.floor(Math.random() * 360),
-                playerHealth: 80,
-                creatureOrientation: Math.floor(Math.random() * 360),
-                creatureDistance: 100,
-                fragsCount: 12
+                IsGameStarted: true,
+                PlayerOrientation: Math.floor(Math.random() * 360),
+                PlayerHealth: 80,
+                CreatureOrientation: Math.floor(Math.random() * 360),
+                CreatureDistance: 100,
+                FragsCount: 12,
             });
-        }, 8000);
+        }, 300);
     };
 
     // expose module
