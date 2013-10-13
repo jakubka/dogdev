@@ -134,7 +134,7 @@
                     {
                         startValue: -0.7,
                         endValue: 0.7,
-                        duration: 500,
+                        duration: 2500,
                         onChange: function(opacity) {
                             zombiePoint.opacity = 1-Math.abs(opacity);
                             canvas.renderAll();

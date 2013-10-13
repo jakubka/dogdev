@@ -43,6 +43,9 @@
     s.debugMode = ko.observable(false);
 
     s.root = '/DogServer/';
+    if (document.URL.indexOf('azure') != -1) {
+        s.root = '/';
+    }
     s.soundsRootDir = s.root + 'static/sounds/';
 
     // expose module
