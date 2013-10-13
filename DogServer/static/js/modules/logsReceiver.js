@@ -5,22 +5,22 @@
         logsReceiver = {};
 
     logsReceiver.init = function(onDataReceived) {
-        //var presentationHub = $.connection.presentationHub;
-        //presentationHub.client.displayState = function(gameState) {
-        //    onDataReceived(gameState);
-        //};
-        //$.connection.hub.start();
+        var presentationHub = $.connection.presentationHub;
+        presentationHub.client.displayState = function(gameState) {
+            onDataReceived(gameState);
+        };
+        $.connection.hub.start();
         
-        setInterval(function () {
-            onDataReceived && onDataReceived({
-                isGameStarted: true,
-                playerOrientation: Math.floor(Math.random() * 360),
-                playerHealth: 80,
-                creatureOrientation: Math.floor(Math.random() * 360),
-                creatureDistance: 100,
-                fragsCount: 12
-            });
-        }, 8000);
+        //setInterval(function () {
+        //    onDataReceived && onDataReceived({
+        //        isGameStarted: true,
+        //        playerOrientation: Math.floor(Math.random() * 360),
+        //        playerHealth: 80,
+        //        creatureOrientation: Math.floor(Math.random() * 360),
+        //        creatureDistance: 100,
+        //        fragsCount: 12
+        //    });
+        //}, 8000);
     };
 
     // expose module

@@ -15,7 +15,7 @@
         };
 
     Creature.prototype.move = function() {
-        var newDistance = this.distanceFromPlayer() - (100 / s.timeToReachPlayer());
+        var newDistance = this.distanceFromPlayer() - (50 / s.timeToReachPlayer());
         if (newDistance > 1) {
             this.distanceFromPlayer(newDistance);
             this.onMoved && this.onMoved(this);
@@ -28,12 +28,12 @@
         var that = this;
         this.intervalId = setInterval(function() {
             that.move && that.move();
-        }, 1000);
+        }, 500);
     };
 
     Creature.prototype.dispose = function() {
         clearInterval(this.intervalId);
-    }
+    };
 
     Creature.prototype.die = function() {
         this.dispose();
