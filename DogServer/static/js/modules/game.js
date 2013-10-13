@@ -34,7 +34,10 @@
             CreatureOrientation: firstCreature != null ? firstCreature.orientation() : null,
             CreatureDistance: firstCreature != null ? firstCreature.distanceFromPlayer() : null
         };
-
+        if (marian.health() == 0 && marian.fragsCount() == 1) {
+            console.log("je to tu");    
+        }
+        
         logsSender.sendGameState(gameState);
     };
 

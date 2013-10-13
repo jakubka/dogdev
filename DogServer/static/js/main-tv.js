@@ -12,8 +12,10 @@
         canvasXMid = canvasWidth / 2,
         canvasYMid = canvasHeight / 2,
         canvas = new fabric.Canvas('c'),
-        boundaryCirc, zombiePoint, movingLine, zombieVisible, crossLine1, crossLine2, innerCirc1, innerCirc2, triangle, text1, text2, text3;
+        boundaryCirc, zombiePoint, movingLine, zombieVisible, crossLine1, crossLine2, innerCirc1, innerCirc2, triangle, text1, text2, text3, tmt, isTmtSet, prevData;
 
+    tmt = 0;
+    isTmtSet = false;
     // set canvas to stretch to window
     canvas.setWidth(canvasWidth);
     canvas.setHeight(canvasHeight);
@@ -187,18 +189,39 @@
 
 
     hub.init(function(data) {
-        triangle.angle = data.PlayerOrientation;
-        text1.setText("frags: " + data.FragsCount);
-        text2.setText("health: " + data.PlayerHealth);
-
+        if (data.IsGameStarted) {
+            triangle.angle = data.PlayerOrientation;
+            text1.setText("frags: " + data.FragsCount);
+            text2.setText("health: " + data.PlayerHealth);
+        }
+        else {
+            text2.setText("health: " + '0');   
+        }
+/*
         if (data.IsGameStarted && canvas.contains(text3)) {
             canvas.remove(text3);
         } else if (!data.IsGameStarted && !canvas.contains(text3)) {
             canvas.add(text3);
+        }*/
+
+        if (data.IsGameStarted && isTmtSet) {
+            isTmtSet = false;
+            clearTimeout(tmt);
+            if (canvas.contains(text3)) {
+            canvas.remove(text3);}
+        } else if (!data.IsGameStarted && !isTmtSet) {
+            isTmtSet = true;
+            if (!canvas.contains(text3)) {
+            tmt=setTimeout(function() { 
+                if (!canvas.contains(text3)) {
+                    canvas.add(text3);
+                }
+                isTmtSet = false;
+            }, 1000);}
         }
 
         if (data.CreatureDistance == null) {
-            zombiePoint.setVisible = false;
+            zombiePoint.setVisible(false);
         } else {
             var x = (data.CreatureDistance / 100 * maxDistanceFromPlayer * Math.cos((data.CreatureOrientation - 90) / 180 * Math.PI)) + canvasXMid;
             var y = (data.CreatureDistance / 100 * maxDistanceFromPlayer * Math.sin((data.CreatureOrientation - 90) / 180 * Math.PI)) + canvasYMid;
