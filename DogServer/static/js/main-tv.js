@@ -12,8 +12,7 @@
         canvasXMid = canvasWidth / 2,
         canvasYMid = canvasHeight / 2,
         canvas = new fabric.Canvas('c'),
-        $compass = $(".compassIco"),
-        boundaryCirc, zombiePoint, movingLine, zombieVisible, crossLine1, crossLine2, innerCirc1, innerCirc2,triangle;
+        boundaryCirc, zombiePoint, movingLine, zombieVisible, crossLine1, crossLine2, innerCirc1, innerCirc2,triangle, text1, text2, text3;
 
     // set canvas to stretch to window
     canvas.setWidth(canvasWidth);
@@ -50,21 +49,31 @@
 
     
     triangle = new fabric.Triangle({
-        width: 200, 
-        height: 300, 
-        fill: 'blue', 
+        width: 20, 
+        height: 30,
+        fill: 'red', 
         left: canvasXMid, 
-        top: canvasYMid + 100, 
-        angle: 90,
-        rotatingPointOffset: 400,
+        top: canvasYMid, 
+        angle: 0,
+        opacity: 0.5,
+        // originX: 1000,
+        // originY: 100,
     });
-    triangle.setGradient('fill', { type:'radial',x1: 5, y1: 5, x2: 50, y2: 10, r1: 20, r2: 70, colorStops: { '0.2': 'rgba(0,100,0,0.5)', '0.7': 'rgba(0,153,153,0.5)'} });
+    // triangle.setGradient('fill', { 
+    //     type:'linear', 
+    //     x1: -100,
+    //     y1: -10,
+    //     x2: 70,
+    //     y2: 10,
+    //     // r1: 120, r2: 170, 
+    //     colorStops: { 0: 'green', 1: 'rgba(0,0,0,0.1)'} 
+    // });
     
 
 
- 
-
-
+    text1 = new fabric.Text('frags: 000', { backgroundColor: 'rgb(0,200,0)', left: 100, top: 100,  textAlign: 'left' });
+    text2 = new fabric.Text('health: 000', { backgroundColor: 'rgb(0,200,0)', left: 100, top: 150, textAlign: 'left' });
+    text3 = new fabric.Text('DISCONNECTED', { opacity: 1, backgroundColor: 'rgb(0,200,0)', left: 600, top: 150,  fontSize: 150, height: 2000 });
 
 
     crossLine1 = new fabric.Line([canvasXMid, canvasYMid - maxDistanceFromPlayer - 10, canvasXMid, canvasYMid + maxDistanceFromPlayer + 10], {stroke: 'green',strokeWidth: 1,strokeDashArray: [10, 5]});
@@ -77,7 +86,7 @@
 
     zombiePoint = new fabric.Circle({
         fill: 'red',
-        radius: 5,
+        radius: 10,
         opacity: 0,
     });
 
@@ -92,6 +101,9 @@
     canvas.add(innerCirc1);
     canvas.add(innerCirc2);
     canvas.add(triangle);
+    canvas.add(text1);
+    canvas.add(text2);
+    canvas.add(text3);
     
 
     
@@ -144,10 +156,21 @@
 
     hub.init(function(data) {
         // update compass
-        $compass.css('-webkit-transform', 'rotate(' + (-data.playerOrientation) + 'deg)');
+        // $compass.css('-webkit-transform', 'rotate(' + (-data.playerOrientation) + 'deg)');
 
-        var x = (data.creatureDistance / 100 * maxDistanceFromPlayer * Math.cos((data.creatureOrientation - 90) / 180 * Math.PI)) + canvasXMid;
-        var y = (data.creatureDistance / 100 * maxDistanceFromPlayer * Math.sin((data.creatureOrientation - 90) / 180 * Math.PI)) + canvasYMid;
+        triangle.angle = data.PlayerOrientation;
+        text1.setText("frags: " + data.FragsCount);
+        text2.setText("health: " + data.PlayerHealth);
+
+        if (data.IsGameStarted) {
+            text3.opacity = 0;
+        } else {
+            text3.opacity = 1;
+        }
+
+
+        var x = (data.CreatureDistance / 100 * maxDistanceFromPlayer * Math.cos((data.CreatureOrientation - 90) / 180 * Math.PI)) + canvasXMid;
+        var y = (data.CreatureDistance / 100 * maxDistanceFromPlayer * Math.sin((data.CreatureOrientation - 90) / 180 * Math.PI)) + canvasYMid;
 
         // update zombie
         zombiePoint.set({
